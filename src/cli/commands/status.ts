@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import Table from 'cli-table3';
-import { getConfig } from '../../config/index.js';
-import { ProviderConfig } from '../../types.js';
-import { PROVIDERS } from '../../providers/registry.js';
+import { getConfig } from '../../config/index';
+import { ProviderConfig } from '../../types';
+import { PROVIDERS } from '../../providers/registry';
 
 /**
  * Status command - show system status

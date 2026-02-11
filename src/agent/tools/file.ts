@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { dirname } from 'path';
-import { BaseTool } from './registry.js';
-import { ToolDefinition, ToolResult } from '../../types.js';
+import { BaseTool } from './registry';
+import { ToolDefinition, ToolResult } from '../../types';
 
 /**
  * File read tool

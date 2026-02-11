@@ -1,13 +1,13 @@
-import { AgentConfig, Message, ToolCall } from '../types.js';
-import { ProviderManager } from '../providers/index.js';
-import { Memory } from './memory.js';
-import { ContextBuilder } from './context.js';
-import { SkillsLoader } from './skills.js';
-import { ToolRegistry } from './tools/registry.js';
-import { ShellTool } from './tools/shell.js';
-import { ReadFileTool, WriteFileTool } from './tools/file.js';
-import { Config } from '../config/schema.js';
-import { logger } from '../utils/logger.js';
+import { AgentConfig, Message, ToolCall } from '../types';
+import { ProviderManager } from '../providers/index';
+import { Memory } from './memory';
+import { ContextBuilder } from './context';
+import { SkillsLoader } from './skills';
+import { ToolRegistry } from './tools/registry';
+import { ShellTool } from './tools/shell';
+import { ReadFileTool, WriteFileTool } from './tools/file';
+import { Config } from '../config/schema';
+import { logger } from '../utils/logger';
 
 /**
  * Agent response

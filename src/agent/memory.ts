@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
-import { Message } from '../types.js';
-import { getMemoryDir } from '../utils/helpers.js';
-import { logger } from '../utils/logger.js';
+import { Message } from '../types';
+import { getMemoryDir } from '../utils/helpers';
+import { logger } from '../utils/logger';
 
 /**
  * Memory storage for conversations

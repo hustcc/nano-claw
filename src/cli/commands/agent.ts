@@ -1,7 +1,7 @@
 import * as readline from 'readline';
 import chalk from 'chalk';
-import { getConfig } from '../../config/index.js';
-import { AgentLoop } from '../../agent/loop.js';
+import { getConfig } from '../../config/index';
+import { AgentLoop } from '../../agent/loop';
 
 /**
  * Agent command - chat with the AI agent

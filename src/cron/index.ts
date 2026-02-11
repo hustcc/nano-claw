@@ -1,11 +1,11 @@
 import { readFileSync, writeFileSync, existsSync } from 'fs';
-import { CronJob } from '../types.js';
-import { getCronJobsPath } from '../utils/helpers.js';
-import { generateId } from '../utils/helpers.js';
-import { logger } from '../utils/logger.js';
-import { CronScheduler } from './scheduler.js';
-import { AgentLoop } from '../agent/loop.js';
-import { Config } from '../config/schema.js';
+import { CronJob } from '../types';
+import { getCronJobsPath } from '../utils/helpers';
+import { generateId } from '../utils/helpers';
+import { logger } from '../utils/logger';
+import { CronScheduler } from './scheduler';
+import { AgentLoop } from '../agent/loop';
+import { Config } from '../config/schema';
 
 /**
  * Cron manager - manages cron jobs persistence and execution

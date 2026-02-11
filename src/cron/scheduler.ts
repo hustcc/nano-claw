@@ -1,7 +1,7 @@
 import cron from 'node-cron';
 import cronParser from 'cron-parser';
-import { CronJob } from '../types.js';
-import { logger } from '../utils/logger.js';
+import { CronJob } from '../types';
+import { logger } from '../utils/logger';
 
 /**
  * Cron job scheduler - manages scheduled task execution

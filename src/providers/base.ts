@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
-import { Message, LLMResponse, ToolDefinition, ToolCall } from '../types.js';
-import { ProviderError } from '../utils/errors.js';
-import { logger } from '../utils/logger.js';
+import { Message, LLMResponse, ToolDefinition, ToolCall } from '../types';
+import { ProviderError } from '../utils/errors';
+import { logger } from '../utils/logger';
 
 /**
  * Base class for LLM providers

@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { Config, ConfigSchema } from './schema.js';
-import { getConfigPath, getHomeDir } from '../utils/helpers.js';
-import { ConfigError } from '../utils/errors.js';
-import { logger } from '../utils/logger.js';
+import { Config, ConfigSchema } from './schema';
+import { getConfigPath, getHomeDir } from '../utils/helpers';
+import { ConfigError } from '../utils/errors';
+import { logger } from '../utils/logger';
 
 /**
  * Load configuration from file

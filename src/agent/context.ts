@@ -1,5 +1,5 @@
-import { Message, Skill, ToolDefinition, AgentConfig } from '../types.js';
-import { formatDate } from '../utils/helpers.js';
+import { Message, Skill, ToolDefinition, AgentConfig } from '../types';
+import { formatDate } from '../utils/helpers';
 
 /**
  * Context builder for constructing prompts

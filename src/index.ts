@@ -1,34 +1,27 @@
 /**
  * nano-claw - Ultra-lightweight personal AI assistant
  * TypeScript + Node.js implementation
+ * 
+ * Main public API exports
  */
 
-// Export main classes and functions
-export { AgentLoop } from './agent/loop.js';
-export { Memory } from './agent/memory.js';
-export { ContextBuilder } from './agent/context.js';
-export { SkillsLoader } from './agent/skills.js';
-export { ToolRegistry, BaseTool } from './agent/tools/registry.js';
-export { ShellTool } from './agent/tools/shell.js';
-export { ReadFileTool, WriteFileTool } from './agent/tools/file.js';
+// Core agent
+export { AgentLoop } from './agent/loop';
+export { Memory } from './agent/memory';
 
-// Export cron system
-export { CronManager } from './cron/index.js';
-export { CronScheduler } from './cron/scheduler.js';
+// Tools
+export { ToolRegistry, BaseTool } from './agent/tools/registry';
 
-// Export providers
-export { ProviderManager } from './providers/index.js';
-export { BaseProvider, OpenRouterProvider, AnthropicProvider, OpenAIProvider } from './providers/base.js';
-export { PROVIDERS, findProviderByName, findProviderByModel } from './providers/registry.js';
+// Cron system
+export { CronManager } from './cron/index';
 
-// Export configuration
-export { getConfig, loadConfig, saveConfig, createDefaultConfig } from './config/index.js';
-export * from './config/schema.js';
+// Providers
+export { ProviderManager } from './providers/index';
+export { BaseProvider } from './providers/base';
 
-// Export types
-export * from './types.js';
+// Configuration
+export { getConfig, loadConfig, saveConfig } from './config/index';
+export type { Config, ProvidersConfig, AgentsConfig, ToolsConfig, ChannelsConfig } from './config/schema';
 
-// Export utilities
-export * from './utils/logger.js';
-export * from './utils/errors.js';
-export * from './utils/helpers.js';
+// Essential types
+export type { Message, ToolCall, ToolResult, ToolDefinition, AgentConfig } from './types';

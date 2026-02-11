@@ -1,14 +1,14 @@
-import { Config } from '../config/schema.js';
-import { Message, LLMResponse, ToolDefinition, ProviderConfig } from '../types.js';
-import { ProviderError } from '../utils/errors.js';
-import { logger } from '../utils/logger.js';
+import { Config } from '../config/schema';
+import { Message, LLMResponse, ToolDefinition, ProviderConfig } from '../types';
+import { ProviderError } from '../utils/errors';
+import { logger } from '../utils/logger';
 import {
   BaseProvider,
   OpenRouterProvider,
   AnthropicProvider,
   OpenAIProvider,
-} from './base.js';
-import { findProviderByModel } from './registry.js';
+} from './base';
+import { findProviderByModel } from './registry';
 
 /**
  * Provider manager - handles provider selection and instantiation

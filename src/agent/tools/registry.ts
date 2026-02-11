@@ -1,5 +1,5 @@
-import { ToolDefinition, ToolResult } from '../../types.js';
-import { logger } from '../../utils/logger.js';
+import { ToolDefinition, ToolResult } from '../../types';
+import { logger } from '../../utils/logger';
 
 /**
  * Base class for tools

@@ -1,7 +1,7 @@
 import { existsSync, mkdirSync } from 'fs';
 import chalk from 'chalk';
-import { createDefaultConfig, saveConfig } from '../../config/index.js';
-import { getHomeDir, getConfigPath, getMemoryDir, getSkillsDir } from '../../utils/helpers.js';
+import { createDefaultConfig, saveConfig } from '../../config/index';
+import { getHomeDir, getConfigPath, getMemoryDir, getSkillsDir } from '../../utils/helpers';
 
 /**
  * Onboard command - initialize configuration

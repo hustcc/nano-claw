@@ -2,17 +2,17 @@
 
 import { Command } from 'commander';
 import chalk from 'chalk';
-import { onboardCommand } from './commands/onboard.js';
-import { agentCommand } from './commands/agent.js';
-import { statusCommand } from './commands/status.js';
+import { onboardCommand } from './commands/onboard';
+import { agentCommand } from './commands/agent';
+import { statusCommand } from './commands/status';
 import {
   cronAddCommand,
   cronListCommand,
   cronRemoveCommand,
   cronEnableCommand,
   cronDisableCommand,
-} from './commands/cron.js';
-import { logger } from '../utils/logger.js';
+} from './commands/cron';
+import { logger } from '../utils/logger';
 
 const program = new Command();
 

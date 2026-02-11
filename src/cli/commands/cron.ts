@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import Table from 'cli-table3';
-import { getConfig } from '../../config/index.js';
-import { CronManager } from '../../cron/index.js';
-import { formatDate } from '../../utils/helpers.js';
+import { getConfig } from '../../config/index';
+import { CronManager } from '../../cron/index';
+import { formatDate } from '../../utils/helpers';
 
 /**
  * Cron add command - add a new cron job

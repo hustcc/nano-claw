@@ -1,8 +1,8 @@
 import { readdirSync, readFileSync, existsSync } from 'fs';
 import { join } from 'path';
-import { Skill } from '../types.js';
-import { getSkillsDir } from '../utils/helpers.js';
-import { logger } from '../utils/logger.js';
+import { Skill } from '../types';
+import { getSkillsDir } from '../utils/helpers';
+import { logger } from '../utils/logger';
 
 /**
  * Skills loader - loads skills from Markdown files

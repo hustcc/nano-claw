@@ -1,4 +1,4 @@
-import { ProviderConfig } from '../types.js';
+import { ProviderConfig } from '../types';
 
 /**
  * Provider specification for the registry

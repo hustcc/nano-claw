@@ -1,7 +1,7 @@
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { BaseTool } from './registry.js';
-import { ToolDefinition, ToolResult } from '../../types.js';
+import { BaseTool } from './registry';
+import { ToolDefinition, ToolResult } from '../../types';
 
 const execAsync = promisify(exec);
 
