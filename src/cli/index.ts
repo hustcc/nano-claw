@@ -5,6 +5,13 @@ import chalk from 'chalk';
 import { onboardCommand } from './commands/onboard.js';
 import { agentCommand } from './commands/agent.js';
 import { statusCommand } from './commands/status.js';
+import {
+  cronAddCommand,
+  cronListCommand,
+  cronRemoveCommand,
+  cronEnableCommand,
+  cronDisableCommand,
+} from './commands/cron.js';
 import { logger } from '../utils/logger.js';
 
 const program = new Command();
@@ -79,15 +86,75 @@ program
     );
   });
 
-// Cron command (placeholder)
-program
-  .command('cron')
-  .description('Manage scheduled tasks (not yet implemented)')
-  .argument('<action>', 'Action to perform (add, list, remove)')
-  .action((action: string) => {
-    console.log(
-      chalk.yellow(`Cron command '${action}' is not yet implemented in this version.`)
-    );
+// Cron commands
+const cron = program.command('cron').description('Manage scheduled tasks');
+
+cron
+  .command('add')
+  .description('Add a new cron job')
+  .requiredOption('-n, --name <name>', 'Job name')
+  .requiredOption('-s, --schedule <schedule>', 'Cron schedule expression')
+  .requiredOption('-t, --task <task>', 'Task to execute')
+  .action(async (options: { name: string; schedule: string; task: string }) => {
+    try {
+      await cronAddCommand(options);
+    } catch (error) {
+      logger.error({ error }, 'Cron add failed');
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
+      process.exit(1);
+    }
+  });
+
+cron
+  .command('list')
+  .description('List all cron jobs')
+  .action(async () => {
+    try {
+      await cronListCommand();
+    } catch (error) {
+      logger.error({ error }, 'Cron list failed');
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
+      process.exit(1);
+    }
+  });
+
+cron
+  .command('remove <id>')
+  .description('Remove a cron job')
+  .action(async (id: string) => {
+    try {
+      await cronRemoveCommand(id);
+    } catch (error) {
+      logger.error({ error }, 'Cron remove failed');
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
+      process.exit(1);
+    }
+  });
+
+cron
+  .command('enable <id>')
+  .description('Enable a cron job')
+  .action(async (id: string) => {
+    try {
+      await cronEnableCommand(id);
+    } catch (error) {
+      logger.error({ error }, 'Cron enable failed');
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
+      process.exit(1);
+    }
+  });
+
+cron
+  .command('disable <id>')
+  .description('Disable a cron job')
+  .action(async (id: string) => {
+    try {
+      await cronDisableCommand(id);
+    } catch (error) {
+      logger.error({ error }, 'Cron disable failed');
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
+      process.exit(1);
+    }
   });
 
 // Parse arguments

@@ -12,6 +12,10 @@ export { ToolRegistry, BaseTool } from './agent/tools/registry.js';
 export { ShellTool } from './agent/tools/shell.js';
 export { ReadFileTool, WriteFileTool } from './agent/tools/file.js';
 
+// Export cron system
+export { CronManager } from './cron/index.js';
+export { CronScheduler } from './cron/scheduler.js';
+
 // Export providers
 export { ProviderManager } from './providers/index.js';
 export { BaseProvider, OpenRouterProvider, AnthropicProvider, OpenAIProvider } from './providers/base.js';
