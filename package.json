@@ -1,0 +1,61 @@
+{
+  "name": "nano-claw",
+  "version": "0.1.0",
+  "description": "Ultra-lightweight personal AI assistant (TypeScript + Node.js)",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "nano-claw": "./dist/cli/index.js"
+  },
+  "scripts": {
+    "build": "tsc && tsc-alias -p tsconfig.json",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "test": "vitest",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "ai",
+    "assistant",
+    "agent",
+    "llm",
+    "chatbot",
+    "automation",
+    "nanobot"
+  ],
+  "author": "hustcc",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.5",
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.3",
+    "commander": "^11.1.0",
+    "cron-parser": "^4.9.0",
+    "dotenv": "^16.3.1",
+    "node-cron": "^3.0.3",
+    "pino": "^8.17.2",
+    "pino-pretty": "^10.3.1",
+    "ws": "^8.16.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.33",
+    "@types/node-cron": "^3.0.11",
+    "@types/ws": "^8.5.10",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.2",
+    "prettier": "^3.1.1",
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.3.3",
+    "vitest": "^1.1.1"
+  }
+}
