@@ -1,5 +1,4 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
-import { dirname } from 'path';
 import { Config, ConfigSchema } from './schema.js';
 import { getConfigPath, getHomeDir } from '../utils/helpers.js';
 import { ConfigError } from '../utils/errors.js';
@@ -99,21 +98,17 @@ export function mergeEnvConfig(config: Config): Config {
   }
 
   // Merge with existing config (env vars take precedence)
+  const mergedProviders = { ...config.providers };
+  for (const [key, value] of Object.entries(envProviders)) {
+    mergedProviders[key as keyof typeof mergedProviders] = {
+      ...(mergedProviders[key as keyof typeof mergedProviders] || {}),
+      ...value,
+    } as never;
+  }
+  
   return {
     ...config,
-    providers: {
-      ...config.providers,
-      ...Object.entries(envProviders).reduce(
-        (acc, [key, value]) => ({
-          ...acc,
-          [key]: {
-            ...(config.providers as Record<string, unknown>)?.[key],
-            ...value,
-          },
-        }),
-        {}
-      ),
-    },
+    providers: mergedProviders,
   };
 }
 
