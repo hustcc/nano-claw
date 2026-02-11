@@ -9,7 +9,7 @@
     "nano-claw": "./dist/cli/index.js"
   },
   "scripts": {
-    "build": "tsc && node scripts/add-js-extensions.mjs",
+    "build": "tsc && tsc-alias -p tsconfig.json",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
     "lint": "eslint src --ext .ts",
@@ -54,6 +54,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.2",
     "prettier": "^3.1.1",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.3.3",
     "vitest": "^1.1.1"
   }
