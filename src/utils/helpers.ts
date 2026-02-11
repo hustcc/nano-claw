@@ -1,5 +1,6 @@
 import { homedir } from 'os';
 import { join } from 'path';
+import { randomUUID as cryptoRandomUUID } from 'crypto';
 
 /**
  * Get the home directory path for nano-claw
@@ -75,8 +76,8 @@ export function parseDate(dateStr: string): Date {
 }
 
 /**
- * Generate a random ID
+ * Generate a random ID using crypto.randomUUID()
  */
 export function generateId(): string {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+  return cryptoRandomUUID();
 }
