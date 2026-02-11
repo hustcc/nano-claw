@@ -26,11 +26,6 @@ export class CronScheduler {
 
       // Schedule new task
       const task = cron.schedule(job.schedule, async () => {
-        if (!job.enabled) {
-          logger.debug({ jobId: job.id }, 'Job is disabled, skipping execution');
-          return;
-        }
-
         logger.info({ jobId: job.id, name: job.name }, 'Executing cron job');
         job.lastRun = new Date();
 

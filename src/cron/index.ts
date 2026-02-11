@@ -165,21 +165,30 @@ export class CronManager {
    */
   private scheduleJob(job: CronJob): void {
     this.scheduler.schedule(job, async () => {
-      // Execute the task using agent
-      const sessionId = `cron-${job.id}`;
+      // Reload job to get current state
+      const jobs = this.loadJobs();
+      const currentJob = jobs.find((j) => j.id === job.id);
+
+      if (!currentJob) {
+        logger.warn({ jobId: job.id }, 'Job not found in storage, skipping execution');
+        return;
+      }
+
+      // Execute the task using agent with unique session ID
+      const sessionId = `cron-${job.id}-${Date.now()}`;
       const agent = new AgentLoop(sessionId, this.config);
 
       try {
-        await agent.processMessage(job.task);
+        await agent.processMessage(currentJob.task);
       } catch (error) {
         logger.error({ error, jobId: job.id }, 'Failed to execute cron job task');
       }
 
-      // Update job in storage
-      const jobs = this.loadJobs();
+      // Update job in storage with fresh data
+      currentJob.lastRun = new Date();
       const jobIndex = jobs.findIndex((j) => j.id === job.id);
       if (jobIndex !== -1) {
-        jobs[jobIndex] = job;
+        jobs[jobIndex] = currentJob;
         this.saveJobs(jobs);
       }
     });
