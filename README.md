@@ -10,7 +10,7 @@
   </p>
 </div>
 
-## About
+## 📖 About
 
 **nano-claw** is a TypeScript + Node.js implementation of [nanobot](https://github.com/HKUDS/nanobot), an ultra-lightweight personal AI assistant inspired by [OpenClaw](https://github.com/openclaw/openclaw).
 
@@ -19,7 +19,7 @@
 - ⚡️ **Lightning Fast**: Minimal footprint for faster startup and lower resource usage
 - 💎 **Easy-to-Use**: Simple configuration and intuitive CLI
 
-## Architecture
+## 🏗️ Architecture
 
 ```
 nano-claw/
@@ -43,7 +43,7 @@ nano-claw/
 └── package.json
 ```
 
-## Features
+## ✨ Features
 
 ### Core Agent
 
@@ -97,7 +97,7 @@ Support for multiple chat platforms:
 - **Subagent Tasks**: Background task execution ✨ NEW
 - **Configuration**: JSON configuration files with Zod validation
 
-## Installation
+## 📦 Installation
 
 ```bash
 npm install -g nano-claw
@@ -107,7 +107,7 @@ pnpm install @antv/ava
 yarn add @antv/ava
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 **1. Initialize**
 
@@ -139,7 +139,7 @@ For OpenRouter (recommended):
 nano-claw agent -m "What is 2+2?"
 ```
 
-## CLI Commands
+## 🔧 CLI Commands
 
 - `nano-claw onboard` - Initialize configuration
 - `nano-claw agent -m "..."` - Chat with agent (single message)
@@ -149,7 +149,7 @@ nano-claw agent -m "What is 2+2?"
 - `nano-claw channels login` - Login to channels (e.g., WhatsApp)
 - `nano-claw cron add/list/remove` - Manage scheduled tasks
 
-## Development
+## 👨‍💻 Development
 
 ```bash
 # Watch mode (auto-rebuild on changes)
@@ -165,7 +165,7 @@ npm run format
 npm run test
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 Configuration file location: `~/.nano-claw/config.json`
 
@@ -176,10 +176,10 @@ See [CONFIGURATION.md](documentation/CONFIGURATION.md) for detailed configuratio
 - Chat channel integrations
 - Environment variables
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## License
+## 📄 License
 
 MIT License - see [LICENSE](LICENSE) file for details
