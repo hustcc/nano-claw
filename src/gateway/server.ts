@@ -66,7 +66,7 @@ export class GatewayServer {
   /**
    * Register available channels
    */
-  private async registerChannels(config: any): Promise<void> {
+  private async registerChannels(config: Awaited<ReturnType<typeof getConfig>>): Promise<void> {
     // Register Telegram channel if configured
     if (config.channels?.telegram) {
       const telegramChannel = new TelegramChannel(config.channels.telegram);

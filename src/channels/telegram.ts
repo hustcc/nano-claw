@@ -42,6 +42,7 @@ export class TelegramChannel extends BaseChannel {
     }
 
     try {
+      // Initialize bot without auto-polling (we start it manually in start())
       this.bot = new TelegramBot(this.config.token, { polling: false });
       logger.info('Telegram channel initialized');
     } catch (error) {
