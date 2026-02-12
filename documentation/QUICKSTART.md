@@ -311,11 +311,16 @@ npm run build
 
 ## Next Steps
 
+- **[Examples Directory](../examples/)** - Comprehensive guides and examples
+  - [Basic Usage](../examples/basic-usage.md) - 10+ practical examples
+  - [Integration Examples](../examples/integration-examples.md) - Telegram, Discord, vLLM
+  - [Advanced Features](../examples/advanced-features.md) - Skills, cron, subagents
+  - [Use Cases](../examples/use-case-scenarios.md) - Real-world scenarios
+  - [Code Recipes](../examples/code-recipes.md) - Patterns & troubleshooting
 - [Configuration Guide](CONFIGURATION.md) - Complete configuration reference
-- [Full Documentation](../README.md)
-- [Architecture](ARCHITECTURE.md)
-- [Examples](../examples/)
-- [Contributing Guide](../CONTRIBUTING.md)
+- [Architecture](ARCHITECTURE.md) - System design and internals
+- [Contributing Guide](../CONTRIBUTING.md) - Development guide
+- [Full Documentation](../README.md) - Project overview
 - [Original nanobot Project](https://github.com/HKUDS/nanobot)
 
 ## Getting Help

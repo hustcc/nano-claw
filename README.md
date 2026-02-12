@@ -165,6 +165,17 @@ npm run format
 npm run test
 ```
 
+## 📚 Examples & Guides
+
+Comprehensive examples to help you get started and master nano-claw:
+
+- **[Examples Directory](examples/)** - Complete guide to all examples
+- **[Basic Usage](examples/basic-usage.md)** - Getting started for beginners
+- **[Integration Examples](examples/integration-examples.md)** - Telegram, Discord, local models
+- **[Advanced Features](examples/advanced-features.md)** - Custom skills, cron, subagents
+- **[Use Case Scenarios](examples/use-case-scenarios.md)** - Real-world examples
+- **[Code Recipes](examples/code-recipes.md)** - Configuration patterns and troubleshooting
+
 ## ⚙️ Configuration
 
 Configuration file location: `~/.nano-claw/config.json`
