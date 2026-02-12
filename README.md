@@ -153,9 +153,6 @@ nano-claw agent -m "What is 2+2?"
 - `nano-claw agent` - Interactive mode
 - `nano-claw gateway` - Start gateway server for channels ✨ NEW
 - `nano-claw status` - Show system status
-- `nano-claw cron add/list/remove` - Manage scheduled tasks
-- `nano-claw gateway` - Start gateway server
-- `nano-claw status` - Show system status
 - `nano-claw channels login` - Login to channels (e.g., WhatsApp)
 - `nano-claw cron add/list/remove` - Manage scheduled tasks
 

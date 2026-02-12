@@ -57,8 +57,8 @@ export async function gatewayCommand(): Promise<void> {
       console.log(`  Status: ${status.heartbeat.running ? 'running' : 'stopped'}\n`);
     }
 
-    // Keep the process running
-    await new Promise(() => {
+    // Keep the process running indefinitely
+    await new Promise<never>(() => {
       // This will keep running until SIGINT/SIGTERM
     });
   } catch (error) {

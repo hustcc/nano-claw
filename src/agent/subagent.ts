@@ -33,7 +33,7 @@ export class Subagent {
    * Spawn a background task
    */
   async spawn(description: string, context: AgentContext): Promise<string> {
-    const taskId = `task-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const taskId = `task-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
     const task: SubagentTask = {
       id: taskId,
