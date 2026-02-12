@@ -7,7 +7,6 @@
     <img src="https://img.shields.io/badge/typescript-5.x-blue" alt="TypeScript">
     <img src="https://img.shields.io/badge/node-%3E%3D18-green" alt="Node.js">
     <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
-    <img src="https://img.shields.io/badge/code-4952%20lines-brightgreen" alt="Lines of Code">
   </p>
 </div>
 
