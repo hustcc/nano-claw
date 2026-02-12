@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/typescript-5.x-blue" alt="TypeScript">
     <img src="https://img.shields.io/badge/node-%3E%3D18-green" alt="Node.js">
     <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
-    <img src="https://img.shields.io/badge/code-2508%20lines-brightgreen" alt="Lines of Code">
+    <img src="https://img.shields.io/badge/code-4952%20lines-brightgreen" alt="Lines of Code">
   </p>
 </div>
 
@@ -68,6 +68,7 @@ Support for multiple LLM providers:
 - Groq
 - Gemini
 - MiniMax
+- **AiHubMix** (API gateway, all models) ✨ NEW
 - Dashscope (Qwen)
 - Moonshot (Kimi)
 - Zhipu (GLM)
@@ -75,22 +76,26 @@ Support for multiple LLM providers:
 
 ### Chat Channels
 Support for multiple chat platforms:
-- Telegram
-- Discord
-- WhatsApp
-- Feishu (飞书)
-- Slack
-- Email
-- QQ
-- DingTalk (钉钉)
-- Mochat
+- **Telegram** ✅ Implemented
+- **Discord** ✅ Implemented
+- **DingTalk / 钉钉** ✅ Implemented
+- WhatsApp (config ready)
+- Feishu / 飞书 (config ready)
+- Slack (config ready)
+- Email (config ready)
+- QQ (config ready)
+- Mochat (config ready)
+
+> **Note**: Telegram, Discord, and DingTalk channel adapters are fully implemented. Additional channel adapters can be added by extending the `BaseChannel` class.
 
 ### Other Features
-- **Message Bus**: Message routing and distribution
+- **Gateway Server**: Central hub for channel management ✨ NEW
+- **Message Bus**: Event-driven message routing ✨ NEW
 - **Cron Tasks**: Schedule tasks with cron expressions
-- **Heartbeat**: Proactive wake-up mechanism
-- **Session Management**: Multi-session support
-- **Configuration**: JSON configuration files
+- **Heartbeat**: Proactive wake-up mechanism ✨ NEW
+- **Session Management**: Multi-user, multi-channel session support ✨ ENHANCED
+- **Subagent Tasks**: Background task execution ✨ NEW
+- **Configuration**: JSON configuration files with Zod validation
 
 ## Installation
 
@@ -144,9 +149,9 @@ nano-claw agent -m "What is 2+2?"
 ## CLI Commands
 
 - `nano-claw onboard` - Initialize configuration
-- `nano-claw agent -m "..."` - Chat with agent
+- `nano-claw agent -m "..."` - Chat with agent (single message)
 - `nano-claw agent` - Interactive mode
-- `nano-claw gateway` - Start gateway server
+- `nano-claw gateway` - Start gateway server for channels ✨ NEW
 - `nano-claw status` - Show system status
 - `nano-claw channels login` - Login to channels (e.g., WhatsApp)
 - `nano-claw cron add/list/remove` - Manage scheduled tasks

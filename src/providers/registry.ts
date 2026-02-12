@@ -80,6 +80,15 @@ export const PROVIDERS: ProviderSpec[] = [
     skipPrefixes: ['minimax/'],
   },
   {
+    name: 'aihubmix',
+    keywords: ['aihubmix'],
+    envKey: 'AIHUBMIX_API_KEY',
+    displayName: 'AiHubMix',
+    isGateway: true,
+    detectByBaseKeyword: 'aihubmix',
+    stripModelPrefix: true,
+  },
+  {
     name: 'dashscope',
     keywords: ['dashscope', 'qwen'],
     envKey: 'DASHSCOPE_API_KEY',

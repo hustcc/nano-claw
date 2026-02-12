@@ -5,6 +5,7 @@ import chalk from 'chalk';
 import { onboardCommand } from './commands/onboard';
 import { agentCommand } from './commands/agent';
 import { statusCommand } from './commands/status';
+import { gatewayCommand } from './commands/gateway';
 import {
   cronAddCommand,
   cronListCommand,
@@ -16,10 +17,7 @@ import { logger } from '../utils/logger';
 
 const program = new Command();
 
-program
-  .name('nano-claw')
-  .description('Ultra-lightweight personal AI assistant')
-  .version('0.1.0');
+program.name('nano-claw').description('Ultra-lightweight personal AI assistant').version('0.1.0');
 
 // Onboard command
 program
@@ -65,14 +63,18 @@ program
     }
   });
 
-// Gateway command (placeholder)
+// Gateway command
 program
   .command('gateway')
-  .description('Start gateway server (not yet implemented)')
-  .action(() => {
-    console.log(
-      chalk.yellow('Gateway command is not yet implemented in this version.')
-    );
+  .description('Start gateway server for channel integrations')
+  .action(async () => {
+    try {
+      await gatewayCommand();
+    } catch (error) {
+      logger.error({ error }, 'Gateway command failed');
+      console.error(chalk.red(`Error: ${(error as Error).message}`));
+      process.exit(1);
+    }
   });
 
 // Channels command (placeholder)

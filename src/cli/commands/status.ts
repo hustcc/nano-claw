@@ -70,17 +70,11 @@ export async function statusCommand(): Promise<void> {
     ]);
 
     if (toolsConfig?.allowedCommands && toolsConfig.allowedCommands.length > 0) {
-      toolsTable.push([
-        'Allowed Commands',
-        chalk.cyan(toolsConfig.allowedCommands.join(', ')),
-      ]);
+      toolsTable.push(['Allowed Commands', chalk.cyan(toolsConfig.allowedCommands.join(', '))]);
     }
 
     if (toolsConfig?.deniedCommands && toolsConfig.deniedCommands.length > 0) {
-      toolsTable.push([
-        'Denied Commands',
-        chalk.cyan(toolsConfig.deniedCommands.join(', ')),
-      ]);
+      toolsTable.push(['Denied Commands', chalk.cyan(toolsConfig.deniedCommands.join(', '))]);
     }
 
     console.log(toolsTable.toString());
