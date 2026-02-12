@@ -17,10 +17,7 @@ import { logger } from '../utils/logger';
 
 const program = new Command();
 
-program
-  .name('nano-claw')
-  .description('Ultra-lightweight personal AI assistant')
-  .version('0.1.0');
+program.name('nano-claw').description('Ultra-lightweight personal AI assistant').version('0.1.0');
 
 // Onboard command
 program

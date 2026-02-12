@@ -134,10 +134,7 @@ export class AgentLoop {
           // Execute each tool call
           for (const toolCall of response.toolCalls) {
             const toolName = toolCall.function.name;
-            const toolArgs = JSON.parse(toolCall.function.arguments) as Record<
-              string,
-              unknown
-            >;
+            const toolArgs = JSON.parse(toolCall.function.arguments) as Record<string, unknown>;
 
             logger.info({ tool: toolName, args: toolArgs }, 'Executing tool');
 
@@ -146,9 +143,7 @@ export class AgentLoop {
             // Add tool result to memory
             this.memory.addMessage({
               role: 'tool',
-              content: toolResult.success
-                ? toolResult.output
-                : `Error: ${toolResult.error}`,
+              content: toolResult.success ? toolResult.output : `Error: ${toolResult.error}`,
               name: toolName,
               tool_call_id: toolCall.id,
             });

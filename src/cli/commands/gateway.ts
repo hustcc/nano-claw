@@ -29,7 +29,7 @@ export async function gatewayCommand(): Promise<void> {
 
     // Get initial status
     const status = gateway.getStatus();
-    
+
     // Display channel statuses
     const enabledChannels = Object.entries(status.channels).filter(
       ([_, channelStatus]) => channelStatus.enabled

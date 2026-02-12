@@ -97,9 +97,7 @@ export class SessionManager {
    * Get all sessions for a user
    */
   getUserSessions(userId: string): Session[] {
-    return Array.from(this.sessions.values()).filter(
-      (session) => session.userId === userId
-    );
+    return Array.from(this.sessions.values()).filter((session) => session.userId === userId);
   }
 
   /**
@@ -107,18 +105,13 @@ export class SessionManager {
    */
   getActiveSessions(hours: number = 24): Session[] {
     const cutoff = new Date(Date.now() - hours * 60 * 60 * 1000);
-    return Array.from(this.sessions.values()).filter(
-      (session) => session.lastActivity > cutoff
-    );
+    return Array.from(this.sessions.values()).filter((session) => session.lastActivity > cutoff);
   }
 
   /**
    * Update session metadata
    */
-  async updateSessionMetadata(
-    sessionId: string,
-    metadata: Record<string, unknown>
-  ): Promise<void> {
+  async updateSessionMetadata(sessionId: string, metadata: Record<string, unknown>): Promise<void> {
     const session = this.sessions.get(sessionId);
     if (session) {
       session.metadata = { ...session.metadata, ...metadata };

@@ -22,7 +22,7 @@ export class ChannelManager {
    */
   registerChannel(channel: BaseChannel): void {
     const channelType = channel.getChannelType();
-    
+
     if (this.channels.has(channelType)) {
       logger.warn(`Channel ${channelType} is already registered`);
       return;
@@ -146,7 +146,7 @@ export class ChannelManager {
    */
   getAllChannelStatuses(): Record<string, ReturnType<BaseChannel['getStatus']>> {
     const statuses: Record<string, ReturnType<BaseChannel['getStatus']>> = {};
-    
+
     for (const [channelType, channel] of this.channels.entries()) {
       statuses[channelType] = channel.getStatus();
     }

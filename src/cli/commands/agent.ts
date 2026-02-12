@@ -6,10 +6,7 @@ import { AgentLoop } from '../../agent/loop';
 /**
  * Agent command - chat with the AI agent
  */
-export async function agentCommand(options: {
-  message?: string;
-  session?: string;
-}): Promise<void> {
+export async function agentCommand(options: { message?: string; session?: string }): Promise<void> {
   const sessionId = options.session || 'default';
 
   // Load configuration

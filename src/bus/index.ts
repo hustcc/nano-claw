@@ -64,9 +64,7 @@ export class MessageBus extends EventEmitter {
    * Publish a message to the bus
    */
   async publish(message: ChannelMessage): Promise<void> {
-    logger.info(
-      `Publishing message from ${message.channelType}: ${message.id}`
-    );
+    logger.info(`Publishing message from ${message.channelType}: ${message.id}`);
 
     // Emit event for potential listeners
     this.emit('message', message);
@@ -91,10 +89,7 @@ export class MessageBus extends EventEmitter {
   /**
    * Safely call a handler with error handling
    */
-  private async safeHandlerCall(
-    handler: MessageHandler,
-    message: ChannelMessage
-  ): Promise<void> {
+  private async safeHandlerCall(handler: MessageHandler, message: ChannelMessage): Promise<void> {
     try {
       await handler(message);
     } catch (error) {

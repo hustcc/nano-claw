@@ -109,9 +109,7 @@ export class GatewayServer {
    * Handle incoming message
    */
   private async handleMessage(message: ChannelMessage): Promise<void> {
-    logger.info(
-      `Handling message from ${message.channelType} (user: ${message.userId})`
-    );
+    logger.info(`Handling message from ${message.channelType} (user: ${message.userId})`);
 
     try {
       // Get or create session
@@ -124,12 +122,9 @@ export class GatewayServer {
 
       // Get config
       const config = await getConfig();
-      
+
       // Create agent loop for this session and message
-      const agentLoop = new AgentLoop(
-        message.sessionId,
-        config
-      );
+      const agentLoop = new AgentLoop(message.sessionId, config);
 
       // Process the message
       const result = await agentLoop.processMessage(message.content);
@@ -145,7 +140,7 @@ export class GatewayServer {
       logger.info(`Response sent to ${message.userId} via ${message.channelType}`);
     } catch (error) {
       logger.error('Error handling message', error);
-      
+
       // Try to send error message back to user
       try {
         await this.channelManager.sendMessage(

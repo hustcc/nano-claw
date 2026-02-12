@@ -108,7 +108,7 @@ export function mergeEnvConfig(config: Config): Config {
       ...value,
     } as never;
   }
-  
+
   return {
     ...config,
     providers: mergedProviders,

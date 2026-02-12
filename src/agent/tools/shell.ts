@@ -16,11 +16,7 @@ export class ShellTool extends BaseTool {
   private deniedCommands?: string[];
   private restrictToWorkspace: boolean;
 
-  constructor(
-    restrictToWorkspace = false,
-    allowedCommands?: string[],
-    deniedCommands?: string[]
-  ) {
+  constructor(restrictToWorkspace = false, allowedCommands?: string[], deniedCommands?: string[]) {
     super();
     this.restrictToWorkspace = restrictToWorkspace;
     this.allowedCommands = allowedCommands;

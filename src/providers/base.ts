@@ -173,8 +173,7 @@ export class AnthropicProvider extends BaseProvider {
           ? {
               promptTokens: response.data.usage.input_tokens,
               completionTokens: response.data.usage.output_tokens,
-              totalTokens:
-                response.data.usage.input_tokens + response.data.usage.output_tokens,
+              totalTokens: response.data.usage.input_tokens + response.data.usage.output_tokens,
             }
           : undefined,
       };

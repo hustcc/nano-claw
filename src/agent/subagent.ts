@@ -34,7 +34,7 @@ export class Subagent {
    */
   async spawn(description: string, context: AgentContext): Promise<string> {
     const taskId = `task-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    
+
     const task: SubagentTask = {
       id: taskId,
       description,
@@ -134,18 +134,14 @@ export class Subagent {
    * Get running tasks
    */
   getRunningTasks(): SubagentTask[] {
-    return Array.from(this.tasks.values()).filter(
-      (task) => task.status === 'running'
-    );
+    return Array.from(this.tasks.values()).filter((task) => task.status === 'running');
   }
 
   /**
    * Get pending tasks
    */
   getPendingTasks(): SubagentTask[] {
-    return Array.from(this.tasks.values()).filter(
-      (task) => task.status === 'pending'
-    );
+    return Array.from(this.tasks.values()).filter((task) => task.status === 'pending');
   }
 
   /**
@@ -171,10 +167,7 @@ export class Subagent {
     const toDelete: string[] = [];
 
     for (const [taskId, task] of this.tasks.entries()) {
-      if (
-        task.completedAt &&
-        now - task.completedAt.getTime() > maxAge
-      ) {
+      if (task.completedAt && now - task.completedAt.getTime() > maxAge) {
         toDelete.push(taskId);
       }
     }
@@ -190,12 +183,10 @@ export class Subagent {
   /**
    * Wait for a task to complete
    */
-  async waitForTask(
-    taskId: string,
-    timeoutMs: number = 60000
-  ): Promise<SubagentTask> {
+  async waitForTask(taskId: string, timeoutMs: number = 60000): Promise<SubagentTask> {
     const startTime = Date.now();
 
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       const task = this.tasks.get(taskId);
       if (!task) {

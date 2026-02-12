@@ -68,29 +68,34 @@ Support for multiple LLM providers:
 - Groq
 - Gemini
 - MiniMax
+- **AiHubMix** (API gateway, all models) ✨ NEW
 - Dashscope (Qwen)
 - Moonshot (Kimi)
 - Zhipu (GLM)
 - vLLM (local models)
 
 ### Chat Channels
-Support for multiple chat platforms:
-- Telegram
-- Discord
-- WhatsApp
-- Feishu (飞书)
-- Slack
-- Email
-- QQ
-- DingTalk (钉钉)
-- Mochat
+Support for multiple chat platforms (infrastructure ready):
+- Telegram (config ready)
+- Discord (config ready)
+- WhatsApp (config ready)
+- Feishu / 飞书 (config ready)
+- Slack (config ready)
+- Email (config ready)
+- QQ (config ready)
+- DingTalk / 钉钉 (config ready)
+- Mochat (config ready)
+
+> **Note**: Channel infrastructure and gateway server are implemented. Specific channel adapters can be added by extending the `BaseChannel` class.
 
 ### Other Features
-- **Message Bus**: Message routing and distribution
+- **Gateway Server**: Central hub for channel management ✨ NEW
+- **Message Bus**: Event-driven message routing ✨ NEW
 - **Cron Tasks**: Schedule tasks with cron expressions
-- **Heartbeat**: Proactive wake-up mechanism
-- **Session Management**: Multi-session support
-- **Configuration**: JSON configuration files
+- **Heartbeat**: Proactive wake-up mechanism ✨ NEW
+- **Session Management**: Multi-user, multi-channel session support ✨ ENHANCED
+- **Subagent Tasks**: Background task execution ✨ NEW
+- **Configuration**: JSON configuration files with Zod validation
 
 ## Installation
 
@@ -144,8 +149,11 @@ nano-claw agent -m "What is 2+2?"
 ## CLI Commands
 
 - `nano-claw onboard` - Initialize configuration
-- `nano-claw agent -m "..."` - Chat with agent
+- `nano-claw agent -m "..."` - Chat with agent (single message)
 - `nano-claw agent` - Interactive mode
+- `nano-claw gateway` - Start gateway server for channels ✨ NEW
+- `nano-claw status` - Show system status
+- `nano-claw cron add/list/remove` - Manage scheduled tasks
 - `nano-claw gateway` - Start gateway server
 - `nano-claw status` - Show system status
 - `nano-claw channels login` - Login to channels (e.g., WhatsApp)

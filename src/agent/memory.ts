@@ -35,10 +35,7 @@ export class Memory {
         const data = readFileSync(this.memoryPath, 'utf-8');
         const parsed = JSON.parse(data) as Message[];
         this.messages = parsed;
-        logger.debug(
-          { sessionId: this.sessionId, count: this.messages.length },
-          'Memory loaded'
-        );
+        logger.debug({ sessionId: this.sessionId, count: this.messages.length }, 'Memory loaded');
       } catch (error) {
         logger.error({ error, sessionId: this.sessionId }, 'Failed to load memory');
         this.messages = [];
@@ -53,10 +50,7 @@ export class Memory {
     try {
       const data = JSON.stringify(this.messages, null, 2);
       writeFileSync(this.memoryPath, data, 'utf-8');
-      logger.debug(
-        { sessionId: this.sessionId, count: this.messages.length },
-        'Memory saved'
-      );
+      logger.debug({ sessionId: this.sessionId, count: this.messages.length }, 'Memory saved');
     } catch (error) {
       logger.error({ error, sessionId: this.sessionId }, 'Failed to save memory');
     }
