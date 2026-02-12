@@ -103,9 +103,9 @@ Support for multiple chat platforms:
 ```bash
 npm install -g nano-claw
 
-pnpm install @antv/ava
+pnpm install -g nano-claw
 
-yarn add @antv/ava
+yarn global add nano-claw
 ```
 
 ## 🚀 Quick Start
