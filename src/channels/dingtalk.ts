@@ -65,11 +65,21 @@ export class DingTalkChannel extends BaseChannel {
     }
 
     try {
-      // Register message callback
+      // Register callback for bot messages
+      // Note: DingTalk Stream API uses different topics based on message type
+      // For bot IM messages, we register both SYSTEM and IM topics
       this.client.registerCallbackListener('SYSTEM', async (res: DWClientDownStream) => {
         await this.handleMessage(res);
         return EventAck.SUCCESS;
       });
+
+      this.client.registerCallbackListener(
+        '/v1.0/im/bot/messages/get',
+        async (res: DWClientDownStream) => {
+          await this.handleMessage(res);
+          return EventAck.SUCCESS;
+        }
+      );
 
       // Connect to DingTalk Stream
       await this.client.connect();
@@ -111,22 +121,46 @@ export class DingTalkChannel extends BaseChannel {
     }
 
     try {
-      // DingTalk uses webhook or API to send messages
-      // For Stream mode, we need to reply to the conversation
+      // DingTalk Stream mode requires using the REST API to send messages
       const conversationId = metadata?.conversationId as string | undefined;
       const robotCode = metadata?.robotCode as string | undefined;
 
-      if (conversationId && robotCode) {
-        // Send message via DingTalk API
-        // Note: This requires additional API setup
-        logger.debug(`Sending message to DingTalk user: ${userId}`);
-
-        // The actual implementation would use DingTalk's REST API
-        // For now, we'll log that we would send the message
-        logger.info(`Would send to conversation ${conversationId}: ${content}`);
-      } else {
-        logger.warn('Missing conversationId or robotCode in metadata');
+      if (!conversationId || !robotCode) {
+        throw new Error(
+          'Missing conversationId or robotCode in metadata for DingTalk message sending'
+        );
       }
+
+      // Use DingTalk's REST API to send messages
+      // This requires an access token which should be obtained from the client
+      const axios = (await import('axios')).default;
+
+      // Get access token from DingTalk
+      const tokenResponse = await axios.post('https://api.dingtalk.com/v1.0/oauth2/accessToken', {
+        appKey: this.config.clientId,
+        appSecret: this.config.clientSecret,
+      });
+
+      const accessToken = tokenResponse.data.accessToken;
+
+      // Send message to conversation
+      await axios.post(
+        `https://api.dingtalk.com/v1.0/robot/oToMessages/batchSend`,
+        {
+          robotCode,
+          userIds: [userId],
+          msgKey: 'sampleText',
+          msgParam: JSON.stringify({ content }),
+        },
+        {
+          headers: {
+            'x-acs-dingtalk-access-token': accessToken,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      logger.debug(`Sent message to DingTalk user: ${userId}`);
     } catch (error) {
       logger.error('Failed to send DingTalk message', error);
       throw error;
