@@ -10,6 +10,13 @@ export function getHomeDir(): string {
 }
 
 /**
+ * Get the config directory path (same as home dir)
+ */
+export function getConfigDir(): string {
+  return getHomeDir();
+}
+
+/**
  * Get the config file path
  */
 export function getConfigPath(): string {

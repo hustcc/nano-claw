@@ -4,6 +4,9 @@ import { getConfigPath, getHomeDir } from '../utils/helpers';
 import { ConfigError } from '../utils/errors';
 import { logger } from '../utils/logger';
 
+// Re-export getConfigDir for external use
+export { getConfigDir } from '../utils/helpers';
+
 /**
  * Load configuration from file
  */

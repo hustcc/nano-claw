@@ -20,6 +20,7 @@ export const ProvidersConfigSchema = z.object({
   groq: ProviderConfigSchema.optional(),
   gemini: ProviderConfigSchema.optional(),
   minimax: ProviderConfigSchema.optional(),
+  aihubmix: ProviderConfigSchema.optional(),
   dashscope: ProviderConfigSchema.optional(),
   moonshot: ProviderConfigSchema.optional(),
   zhipu: ProviderConfigSchema.optional(),
