@@ -8,6 +8,11 @@
   "bin": {
     "nano-claw": "./dist/cli/index.js"
   },
+  "files": [
+    "src",
+    "dist",
+    "documentation"
+  ],
   "scripts": {
     "build": "tsc && tsc-alias -p tsconfig.json",
     "dev": "tsc --watch",
