@@ -71,9 +71,6 @@ nano-claw/
 
 <br>
 
-
-<br>
-
 ## 🎯 Features
 
 ### 🧠 Core Agent
