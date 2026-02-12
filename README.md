@@ -4,6 +4,7 @@
     🦞 Claw is a Ultra-Lightweight Personal AI Assistant you run on your own devices.
   </p>
   <p>
+    <a href="https://www.npmjs.com/package/nano-claw"><img src="https://img.shields.io/npm/v/nano-claw" alt="npm version"></a>
     <img src="https://img.shields.io/badge/typescript-5.x-blue" alt="TypeScript">
     <img src="https://img.shields.io/badge/node-%3E%3D18-green" alt="Node.js">
     <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
