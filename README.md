@@ -171,7 +171,7 @@ npm run test
 
 Configuration file location: `~/.nano-claw/config.json`
 
-See [CONFIGURATION.md](CONFIGURATION.md) for detailed configuration options including:
+See [CONFIGURATION.md](documentation/CONFIGURATION.md) for detailed configuration options including:
 - All 11 LLM providers setup
 - Agent behavior customization
 - Tool execution security

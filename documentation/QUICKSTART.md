@@ -312,10 +312,10 @@ npm run build
 ## Next Steps
 
 - [Configuration Guide](CONFIGURATION.md) - Complete configuration reference
-- [Full Documentation](README.md)
+- [Full Documentation](../README.md)
 - [Architecture](ARCHITECTURE.md)
-- [Examples](examples/)
-- [Contributing Guide](CONTRIBUTING.md)
+- [Examples](../examples/)
+- [Contributing Guide](../CONTRIBUTING.md)
 - [Original nanobot Project](https://github.com/HKUDS/nanobot)
 
 ## Getting Help
