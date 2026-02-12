@@ -7,6 +7,12 @@ import { getChannelManager } from '../channels';
 import { TelegramChannel } from '../channels/telegram';
 import { DiscordChannel } from '../channels/discord';
 import { DingTalkChannel } from '../channels/dingtalk';
+import { WhatsAppChannel } from '../channels/whatsapp';
+import { FeishuChannel } from '../channels/feishu';
+import { SlackChannel } from '../channels/slack';
+import { EmailChannel } from '../channels/email';
+import { QQChannel } from '../channels/qq';
+import { MochatChannel } from '../channels/mochat';
 import { getMessageBus } from '../bus';
 import { getSessionManager } from '../session';
 import { initializeHeartbeat } from '../heartbeat';
@@ -92,7 +98,53 @@ export class GatewayServer {
       logger.info('DingTalk channel registered');
     }
 
-    // Add more channels here as they are implemented
+    // Register WhatsApp channel if configured
+    if (config.channels?.whatsapp) {
+      const whatsappChannel = new WhatsAppChannel(config.channels.whatsapp);
+      await whatsappChannel.initialize();
+      this.channelManager.registerChannel(whatsappChannel);
+      logger.info('WhatsApp channel registered');
+    }
+
+    // Register Feishu channel if configured
+    if (config.channels?.feishu) {
+      const feishuChannel = new FeishuChannel(config.channels.feishu);
+      await feishuChannel.initialize();
+      this.channelManager.registerChannel(feishuChannel);
+      logger.info('Feishu channel registered');
+    }
+
+    // Register Slack channel if configured
+    if (config.channels?.slack) {
+      const slackChannel = new SlackChannel(config.channels.slack);
+      await slackChannel.initialize();
+      this.channelManager.registerChannel(slackChannel);
+      logger.info('Slack channel registered');
+    }
+
+    // Register Email channel if configured
+    if (config.channels?.email) {
+      const emailChannel = new EmailChannel(config.channels.email);
+      await emailChannel.initialize();
+      this.channelManager.registerChannel(emailChannel);
+      logger.info('Email channel registered');
+    }
+
+    // Register QQ channel if configured
+    if (config.channels?.qq) {
+      const qqChannel = new QQChannel(config.channels.qq);
+      await qqChannel.initialize();
+      this.channelManager.registerChannel(qqChannel);
+      logger.info('QQ channel registered');
+    }
+
+    // Register Mochat channel if configured
+    if (config.channels?.mochat) {
+      const mochatChannel = new MochatChannel(config.channels.mochat);
+      await mochatChannel.initialize();
+      this.channelManager.registerChannel(mochatChannel);
+      logger.info('Mochat channel registered');
+    }
   }
 
   /**
