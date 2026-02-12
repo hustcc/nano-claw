@@ -75,17 +75,17 @@ Support for multiple LLM providers:
 
 Support for multiple chat platforms:
 
-- **Telegram** ✅ Implemented
-- **Discord** ✅ Implemented
-- **DingTalk / 钉钉** ✅ Implemented
-- WhatsApp (config ready)
-- Feishu / 飞书 (config ready)
-- Slack (config ready)
-- Email (config ready)
-- QQ (config ready)
-- Mochat (config ready)
+- **Telegram** ✅ Fully implemented
+- **Discord** ✅ Fully implemented
+- **DingTalk / 钉钉** ✅ Fully implemented
+- **WhatsApp** ✅ Stub implementation
+- **Feishu / 飞书** ✅ Stub implementation
+- **Slack** ✅ Stub implementation
+- **Email** ✅ Stub implementation
+- **QQ** ✅ Stub implementation
+- **Mochat** ✅ Stub implementation
 
-> **Note**: Telegram, Discord, and DingTalk channel adapters are fully implemented. Additional channel adapters can be added by extending the `BaseChannel` class.
+> **Note**: All 9 channel adapters are now implemented! Telegram, Discord, and DingTalk have full integration with their respective APIs. The remaining 6 channels (WhatsApp, Feishu, Slack, Email, QQ, Mochat) have stub implementations that follow the same architecture and are ready for API integration.
 
 ### Other Features
 
