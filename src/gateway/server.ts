@@ -4,6 +4,8 @@
  */
 
 import { getChannelManager } from '../channels';
+import { TelegramChannel } from '../channels/telegram';
+import { DiscordChannel } from '../channels/discord';
 import { getMessageBus } from '../bus';
 import { getSessionManager } from '../session';
 import { initializeHeartbeat } from '../heartbeat';
@@ -35,13 +37,18 @@ export class GatewayServer {
     await getSessionManager();
     logger.info('Session manager initialized');
 
+    // Load configuration
+    const config = await getConfig();
+
+    // Register available channels
+    await this.registerChannels(config);
+
     // Subscribe to all messages from the bus
     this.messageBus.subscribeAll(async (message: ChannelMessage) => {
       await this.handleMessage(message);
     });
 
     // Initialize heartbeat if configured
-    const config = await getConfig();
     if (config.agents?.defaults?.systemPrompt) {
       this.heartbeat = initializeHeartbeat({
         enabled: false, // Disabled by default, can be enabled in config
@@ -54,6 +61,29 @@ export class GatewayServer {
     }
 
     logger.info('Gateway initialized');
+  }
+
+  /**
+   * Register available channels
+   */
+  private async registerChannels(config: any): Promise<void> {
+    // Register Telegram channel if configured
+    if (config.channels?.telegram) {
+      const telegramChannel = new TelegramChannel(config.channels.telegram);
+      await telegramChannel.initialize();
+      this.channelManager.registerChannel(telegramChannel);
+      logger.info('Telegram channel registered');
+    }
+
+    // Register Discord channel if configured
+    if (config.channels?.discord) {
+      const discordChannel = new DiscordChannel(config.channels.discord);
+      await discordChannel.initialize();
+      this.channelManager.registerChannel(discordChannel);
+      logger.info('Discord channel registered');
+    }
+
+    // Add more channels here as they are implemented
   }
 
   /**

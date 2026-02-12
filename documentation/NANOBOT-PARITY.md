@@ -90,11 +90,11 @@ This document tracks the implementation status of features from nanobot in nano-
 ## 🚧 Partially Implemented
 
 ### Channel Integrations
-- **Status**: Infrastructure ready, adapters not implemented
-- **Progress**: 0/9 adapters
+- **Status**: 2 adapters implemented, infrastructure complete
+- **Progress**: 2/9 adapters ✨
 - **Channels**:
-  - [ ] Telegram (config ready)
-  - [ ] Discord (config ready)
+  - [x] **Telegram** ✅ Fully implemented
+  - [x] **Discord** ✅ Fully implemented
   - [ ] WhatsApp (config ready)
   - [ ] Feishu/飞书 (config ready)
   - [ ] Slack (config ready)
@@ -103,10 +103,14 @@ This document tracks the implementation status of features from nanobot in nano-
   - [ ] DingTalk/钉钉 (config ready)
   - [ ] Mochat (config ready)
 
-**To implement a channel:**
+**Implemented channels:**
+- **Telegram**: Full bot integration with polling, message handling, and user filtering
+- **Discord**: Bot with message content intent, DM support, and mention detection
+
+**To implement additional channels:**
 1. Extend `BaseChannel` class
 2. Implement required methods (initialize, start, stop, sendMessage, isConnected)
-3. Register with ChannelManager
+3. Register in `gateway/server.ts`
 4. Configuration schema already exists
 
 ## ❌ Not Implemented
@@ -149,8 +153,8 @@ This document tracks the implementation status of features from nanobot in nano-
 | Moonshot/Kimi | ✅ | ✅ | Complete |
 | Zhipu/GLM | ✅ | ✅ | Complete |
 | vLLM | ✅ | ✅ | Complete |
-| Telegram | ✅ | 🚧 | Infrastructure ready |
-| Discord | ✅ | 🚧 | Infrastructure ready |
+| Telegram | ✅ | ✅ | Complete ✨ |
+| Discord | ✅ | ✅ | Complete ✨ |
 | WhatsApp | ✅ | 🚧 | Infrastructure ready |
 | Feishu | ✅ | 🚧 | Infrastructure ready |
 | Slack | ✅ | 🚧 | Infrastructure ready |
@@ -166,16 +170,16 @@ This document tracks the implementation status of features from nanobot in nano-
 **Core Features**: 100% (11/11) ✅  
 **LLM Providers**: 100% (12/12) ✅  
 **Channel Infrastructure**: 100% (1/1) ✅  
-**Channel Adapters**: 0% (0/9) 🚧  
+**Channel Adapters**: 22% (2/9) ✨  
 **Additional Features**: 0% (0/2) ❌  
 
-**Overall Parity**: ~71% (24/35 features)
+**Overall Parity**: ~74% (26/35 features)
 
 ## 🎯 Next Steps to Achieve Full Parity
 
 1. **High Priority**:
-   - Implement Telegram channel adapter
-   - Implement Discord channel adapter
+   - ✅ ~~Implement Telegram channel adapter~~ DONE
+   - ✅ ~~Implement Discord channel adapter~~ DONE
    - Implement WhatsApp channel adapter
 
 2. **Medium Priority**:

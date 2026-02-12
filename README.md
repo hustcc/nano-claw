@@ -7,7 +7,7 @@
     <img src="https://img.shields.io/badge/typescript-5.x-blue" alt="TypeScript">
     <img src="https://img.shields.io/badge/node-%3E%3D18-green" alt="Node.js">
     <img src="https://img.shields.io/badge/license-MIT-green" alt="License">
-    <img src="https://img.shields.io/badge/code-2508%20lines-brightgreen" alt="Lines of Code">
+    <img src="https://img.shields.io/badge/code-4737%20lines-brightgreen" alt="Lines of Code">
   </p>
 </div>
 
@@ -75,9 +75,9 @@ Support for multiple LLM providers:
 - vLLM (local models)
 
 ### Chat Channels
-Support for multiple chat platforms (infrastructure ready):
-- Telegram (config ready)
-- Discord (config ready)
+Support for multiple chat platforms:
+- **Telegram** ✅ Implemented
+- **Discord** ✅ Implemented
 - WhatsApp (config ready)
 - Feishu / 飞书 (config ready)
 - Slack (config ready)
@@ -86,7 +86,7 @@ Support for multiple chat platforms (infrastructure ready):
 - DingTalk / 钉钉 (config ready)
 - Mochat (config ready)
 
-> **Note**: Channel infrastructure and gateway server are implemented. Specific channel adapters can be added by extending the `BaseChannel` class.
+> **Note**: Telegram and Discord channel adapters are fully implemented. Additional channel adapters can be added by extending the `BaseChannel` class.
 
 ### Other Features
 - **Gateway Server**: Central hub for channel management ✨ NEW
