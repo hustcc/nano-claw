@@ -470,4 +470,4 @@ chmod 600 ~/.nano-claw/config.json
 
 - Read [QUICKSTART.md](QUICKSTART.md) for getting started
 - See [ARCHITECTURE.md](ARCHITECTURE.md) for system design
-- Check [CONTRIBUTING.md](CONTRIBUTING.md) for development guide
+- Check [CONTRIBUTING.md](../CONTRIBUTING.md) for development guide
