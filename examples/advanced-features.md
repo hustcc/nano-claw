@@ -61,7 +61,7 @@ This skill helps with SQL database operations and query optimization.
 SELECT * FROM users
 WHERE created_at >= CURRENT_DATE - INTERVAL '30 days'
 ORDER BY created_at DESC;
-```text
+```
 
 ### JOIN Query
 "Get all orders with customer names"
@@ -71,7 +71,7 @@ SELECT o.order_id, o.order_date, c.name, c.email
 FROM orders o
 INNER JOIN customers c ON o.customer_id = c.customer_id
 ORDER BY o.order_date DESC;
-```text
+```
 
 ### Aggregation
 "Count users by country"
@@ -81,7 +81,7 @@ SELECT country, COUNT(*) as user_count
 FROM users
 GROUP BY country
 ORDER BY user_count DESC;
-```text
+```
 
 ## Query Optimization Tips
 
@@ -98,13 +98,13 @@ ORDER BY user_count DESC;
 SELECT * FROM products
 ORDER BY created_at DESC
 LIMIT 20 OFFSET 0;  -- Page 1
-```text
+```
 
 ### Full-Text Search (PostgreSQL)
 ```sql
 SELECT * FROM articles
 WHERE to_tsvector('english', content) @@ to_tsquery('search & terms');
-```text
+```
 
 ### Subqueries
 ```sql
@@ -112,7 +112,7 @@ SELECT * FROM orders
 WHERE customer_id IN (
   SELECT customer_id FROM customers WHERE country = 'USA'
 );
-```text
+```
 
 ## Schema Design Principles
 
@@ -144,7 +144,7 @@ INNER JOIN orders o ON c.customer_id = o.customer_id
 GROUP BY c.customer_id, c.name, c.email
 ORDER BY total_order_amount DESC
 LIMIT 5;
-```text
+```
 
 This query:
 1. Joins customers with their orders
@@ -187,7 +187,7 @@ docker logs -f myapp
 
 # Execute commands in container
 docker exec -it myapp bash
-```text
+```
 
 ### Docker Compose
 ```yaml
@@ -209,7 +209,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata:
-```text
+```
 
 ## Kubernetes Basics
 
@@ -234,7 +234,7 @@ spec:
         image: myapp:latest
         ports:
         - containerPort: 8080
-```text
+```
 
 ### Service
 ```yaml
@@ -249,7 +249,7 @@ spec:
   - port: 80
     targetPort: 8080
   type: LoadBalancer
-```text
+```
 
 ## CI/CD Patterns
 
@@ -270,7 +270,7 @@ jobs:
         run: npm test
       - name: Deploy
         run: npm run deploy
-```text
+```
 
 ## Monitoring Commands
 
@@ -291,7 +291,7 @@ kubectl top pods
 # Logs
 tail -f /var/log/app.log
 journalctl -u myapp -f
-```text
+```
 
 ## Security Best Practices
 

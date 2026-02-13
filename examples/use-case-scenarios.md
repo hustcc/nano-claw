@@ -36,7 +36,7 @@ function processUsers(users) {
 
 const result = processUsers();
 console.log(result);
-```text
+```
 
 🤖 Agent: The error occurs because you're calling `processUsers()` without 
 passing an array argument. The `users` parameter is `undefined`, and you 
@@ -55,7 +55,7 @@ const result = processUsers([
   { name: 'Bob' }
 ]);
 console.log(result); // ['Alice', 'Bob']
-```text
+```
 
 To make it more robust:
 
@@ -68,7 +68,7 @@ function processUsers(users?: Array<{ name: string }>): string[] {
 // Now this is safe
 const result = processUsers();
 console.log(result); // []
-```text
+```
 
 Key improvements:
 1. Added TypeScript types for type safety
@@ -163,13 +163,13 @@ router.post('/register', async (req: Request, res: Response) => {
 });
 
 export default router;
-```text
+```
 
 Install required packages:
 ```bash
 npm install express bcrypt zod pg
 npm install --save-dev @types/express @types/bcrypt @types/pg
-```text
+```
 
 Database table schema:
 ```sql
@@ -182,7 +182,7 @@ CREATE TABLE users (
 );
 
 CREATE INDEX idx_users_email ON users(email);
-```text
+```
 
 Usage in your Express app:
 ```typescript
@@ -196,7 +196,7 @@ app.use('/api/auth', registerRouter);
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
-```text
+```
 
 Test with curl:
 ```bash
@@ -207,7 +207,7 @@ curl -X POST http://localhost:3000/api/auth/register \
     "password": "securepass123",
     "name": "John Doe"
   }'
-```text
+```
 ```
 
 ### Scenario 3: Architecture Discussion
@@ -280,7 +280,7 @@ grpcServer.addService(
   UserServiceService, 
   userServiceImplementation
 );
-```text
+```
 
 This gives you:
 - Simple REST for external consumers
@@ -492,7 +492,7 @@ export function UserList() {
     </div>
   );
 }
-```text
+```
 
 🤖 Agent: I've reviewed your React component. Here are my findings:
 
@@ -504,7 +504,7 @@ export function UserList() {
 fetch('https://api.example.com/users')
   .then(res => res.json())
   .then(data => setUsers(data));
-```text
+```
 
 The fetch call is not in a useEffect, so it runs on every render. When 
 setUsers is called, it triggers a re-render, which triggers another fetch, 
@@ -517,7 +517,7 @@ useEffect(() => {
     .then(res => res.json())
     .then(data => setUsers(data));
 }, []); // Run only once on mount
-```text
+```
 
 ## 🟡 Important Issues
 
@@ -535,7 +535,7 @@ useEffect(() => {
     .then(data => setUsers(data))
     .catch(err => setError(err.message));
 }, []);
-```text
+```
 
 **3. Missing Loading State**
 ```typescript
@@ -555,7 +555,7 @@ useEffect(() => {
       setLoading(false);
     });
 }, []);
-```text
+```
 
 **4. Missing TypeScript Types**
 ```typescript
@@ -567,7 +567,7 @@ interface User {
 }
 
 const [users, setUsers] = useState<User[]>([]);
-```text
+```
 
 ## 💡 Suggestions
 
@@ -590,7 +590,7 @@ useEffect(() => {
   
   fetchUsers();
 }, []);
-```text
+```
 
 **6. Add Cleanup for Aborted Requests**
 ```typescript
@@ -613,7 +613,7 @@ useEffect(() => {
   
   return () => abortController.abort(); // Cleanup
 }, []);
-```text
+```
 
 ## ✅ Complete Improved Version
 
@@ -685,7 +685,7 @@ export function UserList() {
     </div>
   );
 }
-```text
+```
 
 ## Summary
 
@@ -786,7 +786,7 @@ LEFT JOIN orders o ON u.id = o.user_id
 WHERE o.created_at > NOW() - INTERVAL '30 days'
 GROUP BY u.id, u.email
 HAVING SUM(o.total) > 100;
-```text
+```
 
 ## When to Use MongoDB
 
@@ -855,7 +855,7 @@ db.users.aggregate([
   },
   { $match: { totalSpent: { $gt: 100 } } }
 ])
-```text
+```
 
 ## Performance Considerations
 
@@ -965,7 +965,7 @@ a checklist:
 1. **Run Tests**
 ```bash
 npm test
-```text
+```
 
 Should I run the tests for you? (yes/no)
 
@@ -981,7 +981,7 @@ Great! Moving to next step.
 2. **Build Production Bundle**
 ```bash
 npm run build
-```text
+```
 
 Run build? (yes/no)
 
@@ -996,7 +996,7 @@ Output size: 2.3 MB (gzipped: 645 KB)
 3. **Review Recent Changes**
 ```bash
 git log --oneline production..main
-```text
+```
 
 [Tool: execute_shell]
 Show me the changes? (yes/no)
@@ -1035,7 +1035,7 @@ You: yes
 Creating database backup...
 ```bash
 pg_dump $DATABASE_URL > backup_2024-01-15.sql
-```text
+```
 
 ✓ Backup created: backup_2024-01-15.sql (45.2 MB)
 ✓ Uploaded to S3: s3://backups/backup_2024-01-15.sql
@@ -1046,7 +1046,7 @@ Deploying using: docker-compose
 ```bash
 docker-compose pull
 docker-compose up -d
-```text
+```
 
 Deploy now? (yes/no)
 
@@ -1064,7 +1064,7 @@ Deploying...
 7. **Verify Deployment**
 ```bash
 curl https://api.yourapp.com/health
-```text
+```
 
 ✓ API is responding
 ✓ Database connection: OK
@@ -1133,7 +1133,7 @@ function greet(name: string): string {
   return "Hello, " + name.toUpperCase();
 }
 greet(null); // TS Error: Argument of type 'null' is not assignable to parameter of type 'string'
-```text
+```
 
 ### 1.2 Basic Types
 
@@ -1145,7 +1145,7 @@ let age = 30;
 let name = "John";
 let isActive = true;
 let scores = [95, 87, 92];
-```text
+```
 
 Take a moment to try it yourself. When ready, say "show solution".
 
@@ -1165,7 +1165,7 @@ let age = 30;           // TypeScript infers 'number'
 let name = "John";      // TypeScript infers 'string'
 let isActive = true;    // TypeScript infers 'boolean'
 let scores = [95, 87];  // TypeScript infers 'number[]'
-```text
+```
 
 ### 1.3 Interfaces
 
@@ -1185,7 +1185,7 @@ const user: User = {
   email: "alice@example.com"
   // age is optional
 };
-```text
+```
 
 **Exercise 2:** Create an interface for a blog post with:
 - id (number)
@@ -1220,7 +1220,7 @@ const post: BlogPost = {
   published: true,
   tags: ["typescript", "programming", "tutorial"]
 };
-```text
+```
 
 Great job! Ready for Module 2? (yes/continue/take a break)
 
@@ -1250,7 +1250,7 @@ function greet(name: string, greeting?: string): string {
 function power(base: number, exponent: number = 2): number {
   return Math.pow(base, exponent);
 }
-```text
+```
 
 ### 2.2 Union Types
 
@@ -1265,7 +1265,7 @@ id = true;      // Error!
 function printId(id: string | number) {
   console.log(`ID: ${id}`);
 }
-```text
+```
 
 **Exercise 3:** Write a function called `formatValue` that:
 - Takes a parameter that can be string, number, or boolean

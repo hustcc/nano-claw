@@ -144,7 +144,7 @@ reversed_text = reverse_string(original)
 print(f"Original: {original}")
 print(f"Reversed: {reversed_text}")
 # Output: !dlroW ,olleH
-```text
+```
 
 This uses Python's slicing notation [start:stop:step] with a step of -1 to reverse the string.
 
@@ -262,7 +262,7 @@ function factorialIterative(n: number): number {
   
   return result;
 }
-```text
+```
 
 The recursive version is elegant but can hit stack limits with large numbers.
 The iterative version is more efficient for production use.
