@@ -104,7 +104,7 @@ Press Ctrl+C to stop
 4. Send any message to chat with nano-claw!
 
 **Example Conversation:**
-```
+````
 You: /start
 Bot: Hello! I'm your nano-claw assistant. How can I help you today?
 
@@ -128,7 +128,7 @@ my_numbers = [1, 2, 3, 4, 5]
 result = sum_list(my_numbers)
 print(result)  # Output: 15
 ```
-```
+````
 
 ### Security Tips
 
