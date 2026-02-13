@@ -105,7 +105,7 @@ nano-claw agent
 ```
 
 **Session Example:**
-```
+````
 🐈 nano-claw Interactive Mode
 
 Type your message and press Enter. Type "exit" or "quit" to end.
@@ -137,6 +137,7 @@ def reverse_string(text: str) -> str:
         The reversed string
     """
     return text[::-1]
+```
 
 # Example usage
 original = "Hello, World!"
@@ -144,14 +145,13 @@ reversed_text = reverse_string(original)
 print(f"Original: {original}")
 print(f"Reversed: {reversed_text}")
 # Output: !dlroW ,olleH
-```
 
 This uses Python's slicing notation [start:stop:step] with a step of -1 to reverse the string.
 
 You: exit
 
 👋 Goodbye!
-```
+````
 
 ## Example 5: Using Different Sessions
 
@@ -220,7 +220,8 @@ nano-claw agent -m "Write a TypeScript function to calculate the factorial of a 
 ```
 
 **Expected Output:**
-```
+
+````
 🤖 Agent: Here's a TypeScript function to calculate factorial:
 
 ```typescript
@@ -266,7 +267,7 @@ function factorialIterative(n: number): number {
 
 The recursive version is elegant but can hit stack limits with large numbers.
 The iterative version is more efficient for production use.
-```
+````
 
 ## Example 9: Checking Status
 
