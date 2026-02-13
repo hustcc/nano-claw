@@ -31,7 +31,7 @@ Create a skill to help with SQL queries.
 
 **File: `~/.nano-claw/skills/database.md`**
 
-```markdown
+````markdown
 # Database Query Assistant
 
 This skill helps with SQL database operations and query optimization.
@@ -121,7 +121,7 @@ WHERE customer_id IN (
 - Add foreign key constraints
 - Create indexes on foreign keys
 - Use meaningful table and column names
-```
+````
 
 **Usage:**
 ```bash
@@ -129,7 +129,7 @@ nano-claw agent -m "Write a SQL query to find the top 5 customers by total order
 ```
 
 **Expected Response:**
-```
+````
 🤖 Agent: Here's a SQL query to find the top 5 customers by total order amount:
 
 ```sql
@@ -152,13 +152,13 @@ This query:
 3. Counts number of orders
 4. Orders by total amount (highest first)
 5. Limits to top 5 customers
-```
+````
 
 ### Example 2: DevOps Assistant Skill
 
 **File: `~/.nano-claw/skills/devops.md`**
 
-```markdown
+````markdown
 # DevOps Assistant
 
 Helper for common DevOps tasks, infrastructure management, and automation.
@@ -301,7 +301,7 @@ journalctl -u myapp -f
 4. Use secrets management
 5. Enable network policies
 6. Keep systems updated
-```
+````
 
 ---
 
