@@ -26,7 +26,7 @@ nano-claw agent --session debug
 ```
 
 **Conversation:**
-```
+````
 You: I'm getting a "Cannot read property 'map' of undefined" error. Here's my code:
 
 ```typescript
@@ -74,13 +74,13 @@ Key improvements:
 1. Added TypeScript types for type safety
 2. Used optional parameter with default handling
 3. Returns empty array if no users provided
-```
+````
 
 ### Scenario 2: Code Generation
 
 **Situation:** You need to quickly scaffold a new feature.
 
-```
+````
 You: Create a TypeScript Express route handler for user registration with 
 email validation, password hashing, and database insertion.
 
@@ -208,11 +208,11 @@ curl -X POST http://localhost:3000/api/auth/register \
     "name": "John Doe"
   }'
 ```
-```
+````
 
 ### Scenario 3: Architecture Discussion
 
-```
+````
 You: I'm building a microservices architecture. Should I use REST or gRPC 
 for inter-service communication?
 
@@ -288,7 +288,7 @@ This gives you:
 - Flexibility to optimize where needed
 
 Would you like me to show you how to implement either approach?
-```
+````
 
 ---
 
@@ -468,7 +468,7 @@ nano-claw agent --session code-review
 
 **Conversation:**
 
-```
+````
 You: Review this React component for me:
 
 ```typescript
@@ -694,7 +694,7 @@ export function UserList() {
 - ✅ Improved Version: Production-ready with all fixes
 
 Would you like me to explain any of these improvements in detail?
-```
+````
 
 ---
 
@@ -704,7 +704,7 @@ Use nano-claw to help with research and information gathering.
 
 ### Scenario: Technology Comparison
 
-```
+````
 You: I need to choose between PostgreSQL and MongoDB for my new project. 
 Can you help me compare them?
 
@@ -923,7 +923,7 @@ Many modern applications use both:
 
 What kind of project are you building? I can give you a more specific 
 recommendation based on your requirements.
-```
+````
 
 ---
 
@@ -942,7 +942,7 @@ nano-claw cron add "0 */6 * * *" "Check Docker containers health and disk space"
 
 **Interactive Deployment:**
 
-```
+````
 You: I need to deploy my Node.js app to production. Guide me through it.
 
 🤖 Agent: I'll guide you through a safe production deployment. Let me create 
@@ -1091,7 +1091,7 @@ Would you like me to:
 2. Update deployment log
 3. Tag this release in Git
 4. Run smoke tests
-```
+````
 
 ---
 
@@ -1101,7 +1101,7 @@ Use nano-claw as a learning companion.
 
 ### Scenario: Learning New Technology
 
-```
+````
 You: I want to learn TypeScript. I know JavaScript already. Can you teach me?
 
 🤖 Agent: Great! Since you know JavaScript, learning TypeScript will be 
@@ -1277,7 +1277,7 @@ function printId(id: string | number) {
 Try it now!
 
 [...conversation continues with interactive learning...]
-```
+````
 
 ---
 
