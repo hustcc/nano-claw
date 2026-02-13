@@ -29,7 +29,7 @@ Set up nano-claw as a Telegram bot to chat with your AI assistant on the go.
 4. BotFather will provide you with a token like: `123456789:ABCdefGHIjklMNOpqrsTUVwxyz`
 
 **Example conversation with BotFather:**
-```
+```text
 You: /newbot
 BotFather: Alright, a new bot. How are we going to call it? Please choose a name for your bot.
 
@@ -85,7 +85,7 @@ nano-claw gateway
 ```
 
 **Expected Output:**
-```
+```text
 🚀 Starting nano-claw Gateway Server...
 
 ✓ Telegram channel initialized
@@ -104,7 +104,7 @@ Press Ctrl+C to stop
 4. Send any message to chat with nano-claw!
 
 **Example Conversation:**
-```
+```text
 You: /start
 Bot: Hello! I'm your nano-claw assistant. How can I help you today?
 
@@ -127,7 +127,7 @@ def sum_list(numbers: list[float]) -> float:
 my_numbers = [1, 2, 3, 4, 5]
 result = sum_list(my_numbers)
 print(result)  # Output: 15
-```
+```text
 ```
 
 ### Security Tips
@@ -221,7 +221,7 @@ nano-claw gateway
 ```
 
 **Expected Output:**
-```
+```text
 🚀 Starting nano-claw Gateway Server...
 
 ✓ Discord channel initialized
@@ -239,7 +239,7 @@ In your Discord server:
 - **Direct message**: Send a DM to the bot
 
 **Example Interaction:**
-```
+```text
 User: @nano-claw What is TypeScript?
 
 nano-claw Bot: TypeScript is a strongly-typed programming language 
@@ -414,7 +414,7 @@ nano-claw agent -m "Hello! Can you introduce yourself?"
 ```
 
 **Expected Output:**
-```
+```text
 🤖 Agent: Hello! I'm an AI assistant running on your local machine using the 
 Mistral-7B model. I can help you with various tasks while keeping all your data 
 private and secure. How can I assist you today?

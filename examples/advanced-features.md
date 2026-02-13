@@ -61,7 +61,7 @@ This skill helps with SQL database operations and query optimization.
 SELECT * FROM users
 WHERE created_at >= CURRENT_DATE - INTERVAL '30 days'
 ORDER BY created_at DESC;
-```
+```text
 
 ### JOIN Query
 "Get all orders with customer names"
@@ -71,7 +71,7 @@ SELECT o.order_id, o.order_date, c.name, c.email
 FROM orders o
 INNER JOIN customers c ON o.customer_id = c.customer_id
 ORDER BY o.order_date DESC;
-```
+```text
 
 ### Aggregation
 "Count users by country"
@@ -81,7 +81,7 @@ SELECT country, COUNT(*) as user_count
 FROM users
 GROUP BY country
 ORDER BY user_count DESC;
-```
+```text
 
 ## Query Optimization Tips
 
@@ -98,13 +98,13 @@ ORDER BY user_count DESC;
 SELECT * FROM products
 ORDER BY created_at DESC
 LIMIT 20 OFFSET 0;  -- Page 1
-```
+```text
 
 ### Full-Text Search (PostgreSQL)
 ```sql
 SELECT * FROM articles
 WHERE to_tsvector('english', content) @@ to_tsquery('search & terms');
-```
+```text
 
 ### Subqueries
 ```sql
@@ -112,7 +112,7 @@ SELECT * FROM orders
 WHERE customer_id IN (
   SELECT customer_id FROM customers WHERE country = 'USA'
 );
-```
+```text
 
 ## Schema Design Principles
 
@@ -129,7 +129,7 @@ nano-claw agent -m "Write a SQL query to find the top 5 customers by total order
 ```
 
 **Expected Response:**
-```
+```text
 🤖 Agent: Here's a SQL query to find the top 5 customers by total order amount:
 
 ```sql
@@ -144,7 +144,7 @@ INNER JOIN orders o ON c.customer_id = o.customer_id
 GROUP BY c.customer_id, c.name, c.email
 ORDER BY total_order_amount DESC
 LIMIT 5;
-```
+```text
 
 This query:
 1. Joins customers with their orders
@@ -187,7 +187,7 @@ docker logs -f myapp
 
 # Execute commands in container
 docker exec -it myapp bash
-```
+```text
 
 ### Docker Compose
 ```yaml
@@ -209,7 +209,7 @@ services:
       - pgdata:/var/lib/postgresql/data
 volumes:
   pgdata:
-```
+```text
 
 ## Kubernetes Basics
 
@@ -234,7 +234,7 @@ spec:
         image: myapp:latest
         ports:
         - containerPort: 8080
-```
+```text
 
 ### Service
 ```yaml
@@ -249,7 +249,7 @@ spec:
   - port: 80
     targetPort: 8080
   type: LoadBalancer
-```
+```text
 
 ## CI/CD Patterns
 
@@ -270,7 +270,7 @@ jobs:
         run: npm test
       - name: Deploy
         run: npm run deploy
-```
+```text
 
 ## Monitoring Commands
 
@@ -291,7 +291,7 @@ kubectl top pods
 # Logs
 tail -f /var/log/app.log
 journalctl -u myapp -f
-```
+```text
 
 ## Security Best Practices
 
@@ -313,7 +313,7 @@ Automate recurring tasks using cron expressions.
 
 Cron format: `minute hour day month weekday`
 
-```
+```text
 ┌───────────── minute (0 - 59)
 │ ┌───────────── hour (0 - 23)
 │ │ ┌───────────── day of month (1 - 31)
@@ -366,7 +366,7 @@ nano-claw cron list
 ```
 
 **Expected Output:**
-```
+```text
 📅 Scheduled Cron Tasks
 
 ID: 1
@@ -433,7 +433,7 @@ Understand how nano-claw maintains conversation context and manage memory effect
 
 nano-claw stores conversation history in `~/.nano-claw/memory/`:
 
-```
+```text
 ~/.nano-claw/memory/
 ├── default.json           # Default session
 ├── work.json             # Custom session "work"
@@ -456,7 +456,7 @@ nano-claw agent --session work -m "What were we discussing earlier?"
 ```
 
 **Expected Response:**
-```
+```text
 🤖 Agent: We were discussing the API design document review. Would you 
 like me to continue with that topic or help you with something else?
 ```
@@ -567,7 +567,7 @@ nano-claw agent -m "Analyze all TypeScript files in ./src and create a summary r
 ```
 
 **Response:**
-```
+```text
 🤖 Agent: I'll start analyzing the TypeScript files in the background.
 
 [Subagent Task Started]
@@ -578,7 +578,7 @@ I'll notify you when the analysis is complete. You can continue working on other
 ```
 
 **When complete:**
-```
+```text
 [Subagent Task Completed: subagent-001]
 
 Analysis Summary:
@@ -604,7 +604,7 @@ Compile a summary when all are done."
 ```
 
 **Response:**
-```
+```text
 🤖 Agent: I'll research these topics in parallel.
 
 [Subagent Task Started: research-1]
@@ -642,7 +642,7 @@ nano-claw agent -m "I have 100 images in ./images. Resize them all to 800x600. U
 ```
 
 **Response:**
-```
+```text
 🤖 Agent: I'll process the images using parallel subagents.
 
 [Starting batch processing]

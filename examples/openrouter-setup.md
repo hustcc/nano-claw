@@ -77,7 +77,7 @@ In interactive mode (`nano-claw agent`):
 
 ## Example Conversation
 
-```
+```text
 $ nano-claw agent
 
 🐈 nano-claw Interactive Mode

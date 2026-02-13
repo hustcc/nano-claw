@@ -18,7 +18,7 @@ nano-claw onboard
 ```
 
 This creates the configuration directory at `~/.nano-claw/` with the following structure:
-```
+```text
 ~/.nano-claw/
 ├── config.json    # Configuration file
 ├── memory/        # Conversation history
@@ -52,7 +52,7 @@ nano-claw agent -m "Hello! Can you introduce yourself?"
 ```
 
 **Expected Output:**
-```
+```text
 🤖 Agent: Processing your request...
 
 Hello! I'm nano-claw, an ultra-lightweight AI assistant designed to help you with 
@@ -76,7 +76,7 @@ nano-claw agent -m "What is 1234 * 5678?"
 ```
 
 **Expected Output:**
-```
+```text
 🤖 Agent: 1234 × 5678 = 7,006,652
 ```
 
@@ -89,7 +89,7 @@ nano-claw agent -m "Explain what TypeScript is in 3 sentences"
 ```
 
 **Expected Output:**
-```
+```text
 🤖 Agent: TypeScript is a strongly-typed programming language that builds on JavaScript,
 developed by Microsoft. It adds optional static typing to JavaScript, which helps catch
 errors during development and provides better tooling support. TypeScript code compiles
@@ -105,7 +105,7 @@ nano-claw agent
 ```
 
 **Session Example:**
-```
+```text
 🐈 nano-claw Interactive Mode
 
 Type your message and press Enter. Type "exit" or "quit" to end.
@@ -144,7 +144,7 @@ reversed_text = reverse_string(original)
 print(f"Original: {original}")
 print(f"Reversed: {reversed_text}")
 # Output: !dlroW ,olleH
-```
+```text
 
 This uses Python's slicing notation [start:stop:step] with a step of -1 to reverse the string.
 
@@ -179,7 +179,7 @@ nano-claw agent -m "Create a file called notes.txt with the content 'Hello from 
 ```
 
 **Expected Output:**
-```
+```text
 🤖 Agent: I'll create that file for you.
 
 [Tool: write_file executed]
@@ -198,7 +198,7 @@ nano-claw agent -m "List all TypeScript files in the current directory"
 ```
 
 **Expected Output:**
-```
+```text
 🤖 Agent: I'll list the TypeScript files for you.
 
 [Tool: execute_shell executed]
@@ -220,7 +220,7 @@ nano-claw agent -m "Write a TypeScript function to calculate the factorial of a 
 ```
 
 **Expected Output:**
-```
+```text
 🤖 Agent: Here's a TypeScript function to calculate factorial:
 
 ```typescript
@@ -262,7 +262,7 @@ function factorialIterative(n: number): number {
   
   return result;
 }
-```
+```text
 
 The recursive version is elegant but can hit stack limits with large numbers.
 The iterative version is more efficient for production use.
@@ -277,7 +277,7 @@ nano-claw status
 ```
 
 **Expected Output:**
-```
+```text
 📊 nano-claw Status
 
 ✓ Configuration loaded from: /home/user/.nano-claw/config.json
