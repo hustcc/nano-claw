@@ -140,6 +140,18 @@ export const DingTalkChannelSchema = z.object({
 });
 
 /**
+ * Webhook channel configuration schema
+ */
+export const WebhookChannelSchema = z.object({
+  enabled: z.boolean().optional().default(false),
+  port: z.number().optional().default(18794),
+  host: z.string().optional().default('127.0.0.1'),
+  token: z.string().optional(),
+  connectorUrl: z.string().optional().default('http://127.0.0.1:19400/v1/outbound'),
+  allowFrom: z.array(z.string()).optional().default([]),
+});
+
+/**
  * Mochat channel configuration schema
  */
 export const MochatChannelSchema = z.object({
@@ -167,6 +179,7 @@ export const ChannelsConfigSchema = z.object({
   email: EmailChannelSchema.optional(),
   qq: QQChannelSchema.optional(),
   dingtalk: DingTalkChannelSchema.optional(),
+  webhook: WebhookChannelSchema.optional(),
   mochat: MochatChannelSchema.optional(),
 });
 

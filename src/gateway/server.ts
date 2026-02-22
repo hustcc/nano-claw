@@ -7,6 +7,7 @@ import { getChannelManager } from '../channels';
 import { TelegramChannel } from '../channels/telegram';
 import { DiscordChannel } from '../channels/discord';
 import { DingTalkChannel } from '../channels/dingtalk';
+import { WebhookChannel } from '../channels/webhook';
 import { getMessageBus } from '../bus';
 import { getSessionManager } from '../session';
 import { initializeHeartbeat } from '../heartbeat';
@@ -90,6 +91,14 @@ export class GatewayServer {
       await dingtalkChannel.initialize();
       this.channelManager.registerChannel(dingtalkChannel);
       logger.info('DingTalk channel registered');
+    }
+
+    // Register Webhook channel if configured
+    if (config.channels?.webhook) {
+      const webhookChannel = new WebhookChannel(config.channels.webhook);
+      await webhookChannel.initialize();
+      this.channelManager.registerChannel(webhookChannel);
+      logger.info('Webhook channel registered');
     }
 
     // Add more channels here as they are implemented
