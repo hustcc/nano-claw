@@ -34,8 +34,18 @@ export async function gatewayCommand(): Promise<void> {
     process.exit(0);
   };
 
-  process.on('SIGINT', () => void shutdown());
-  process.on('SIGTERM', () => void shutdown());
+  process.on('SIGINT', () => {
+    shutdown().catch((error) => {
+      logger.error('Shutdown failed', error);
+      process.exit(1);
+    });
+  });
+  process.on('SIGTERM', () => {
+    shutdown().catch((error) => {
+      logger.error('Shutdown failed', error);
+      process.exit(1);
+    });
+  });
 
   try {
     await gateway.start();
