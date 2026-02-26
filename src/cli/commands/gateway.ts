@@ -46,6 +46,7 @@ export async function gatewayCommand(): Promise<void> {
 
     // Get initial status
     const status = gateway.getStatus() as GatewayStatus;
+    logger.debug({ status }, 'Gateway status after start');
 
     // Display channel statuses
     const enabledChannels = Object.entries(status.channels).filter(
@@ -79,7 +80,7 @@ export async function gatewayCommand(): Promise<void> {
       // This will keep running until SIGINT/SIGTERM
     });
   } catch (error) {
-    logger.error('Gateway failed', error);
+    logger.error({ err: error }, 'Gateway failed to start');
     console.error(chalk.red(`Error: ${(error as Error).message}`));
     process.exit(1);
   }

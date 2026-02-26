@@ -20,7 +20,7 @@ export { ProviderManager } from './providers/index';
 export { BaseProvider } from './providers/base';
 
 // Configuration
-export { getConfig, loadConfig, saveConfig } from './config/index';
+export { getConfig, loadConfig, saveConfig, getConfigOrDefault } from './config/index';
 export type {
   Config,
   ProvidersConfig,

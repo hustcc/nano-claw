@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'fs';
+import { ZodError } from 'zod';
 import { Config, ConfigSchema } from './schema';
 import { getConfigPath, getHomeDir } from '../utils/helpers';
 import { ConfigError } from '../utils/errors';
@@ -28,6 +29,10 @@ export function loadConfig(): Config {
   } catch (error) {
     if (error instanceof SyntaxError) {
       throw new ConfigError(`Invalid JSON in configuration file: ${error.message}`);
+    }
+    if (error instanceof ZodError) {
+      const details = error.errors.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ');
+      throw new ConfigError(`Invalid configuration schema: ${details}`);
     }
     throw error;
   }
@@ -121,4 +126,20 @@ export function mergeEnvConfig(config: Config): Config {
 export function getConfig(): Config {
   const config = loadConfig();
   return mergeEnvConfig(config);
+}
+
+/**
+ * Get configuration with fallback to defaults when no config file exists.
+ * Useful for commands that can run without prior onboarding.
+ */
+export function getConfigOrDefault(): Config {
+  try {
+    return getConfig();
+  } catch (error) {
+    if (error instanceof ConfigError && !existsSync(getConfigPath())) {
+      logger.debug('No configuration file found, using default configuration');
+      return mergeEnvConfig(createDefaultConfig());
+    }
+    throw error;
+  }
 }

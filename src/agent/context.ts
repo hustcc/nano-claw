@@ -124,6 +124,11 @@ Guidelines:
     const recentMessages: Message[] = [];
     let currentLength = systemMessages.reduce((sum, m) => sum + m.content.length, 0);
 
+    // If system messages alone exceed maxLength, return only system messages
+    if (currentLength >= maxLength) {
+      return systemMessages;
+    }
+
     for (let i = otherMessages.length - 1; i >= 0; i--) {
       const msg = otherMessages[i];
       if (currentLength + msg.content.length > maxLength) {
