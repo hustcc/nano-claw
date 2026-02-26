@@ -97,10 +97,20 @@ export class AgentLoop {
         const skills = this.skillsLoader.getSkills();
         const tools = this.toolRegistry.getDefinitions();
         const conversationMessages = this.memory.getMessages();
-        const contextMessages = this.contextBuilder.buildContextMessages(
+        const rawContextMessages = this.contextBuilder.buildContextMessages(
           conversationMessages,
           skills,
           tools
+        );
+
+        // Truncate context to prevent exceeding model context window.
+        // Budget: maxTokens * 4 chars/token (rough estimate) * 4 (context-to-response ratio).
+        const CHARS_PER_TOKEN = 4;
+        const CONTEXT_TO_RESPONSE_RATIO = 4;
+        const maxContextChars = (this.config.maxTokens || 4096) * CHARS_PER_TOKEN * CONTEXT_TO_RESPONSE_RATIO;
+        const contextMessages = this.contextBuilder.truncateContext(
+          rawContextMessages,
+          maxContextChars
         );
 
         // Call LLM
@@ -134,7 +144,22 @@ export class AgentLoop {
           // Execute each tool call
           for (const toolCall of response.toolCalls) {
             const toolName = toolCall.function.name;
-            const toolArgs = JSON.parse(toolCall.function.arguments) as Record<string, unknown>;
+            let toolArgs: Record<string, unknown>;
+            try {
+              toolArgs = JSON.parse(toolCall.function.arguments) as Record<string, unknown>;
+            } catch {
+              logger.warn(
+                { tool: toolName, arguments: toolCall.function.arguments },
+                'Invalid JSON in tool arguments, skipping tool call'
+              );
+              this.memory.addMessage({
+                role: 'tool',
+                content: `Error: Invalid JSON arguments for tool ${toolName}`,
+                name: toolName,
+                tool_call_id: toolCall.id,
+              });
+              continue;
+            }
 
             logger.info({ tool: toolName, args: toolArgs }, 'Executing tool');
 
