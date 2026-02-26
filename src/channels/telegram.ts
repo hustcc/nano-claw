@@ -31,23 +31,24 @@ export class TelegramChannel extends BaseChannel {
   /**
    * Initialize the Telegram bot
    */
-  async initialize(): Promise<void> {
+  initialize(): Promise<void> {
     if (!this.config.enabled) {
       logger.info('Telegram channel is disabled');
-      return;
+      return Promise.resolve();
     }
 
     if (!this.config.token) {
-      throw new Error('Telegram bot token is required');
+      return Promise.reject(new Error('Telegram bot token is required'));
     }
 
     try {
       // Initialize bot without auto-polling (we start it manually in start())
       this.bot = new TelegramBot(this.config.token, { polling: false });
       logger.info('Telegram channel initialized');
+      return Promise.resolve();
     } catch (error) {
       logger.error('Failed to initialize Telegram channel', error);
-      throw error;
+      return Promise.reject(error);
     }
   }
 
@@ -66,9 +67,11 @@ export class TelegramChannel extends BaseChannel {
 
       // Set up message handler
       this.bot.on('message', (msg) => {
-        this.handleMessage(msg).catch((error) => {
+        try {
+          this.handleMessage(msg);
+        } catch (error) {
           logger.error('Error handling Telegram message', error);
-        });
+        }
       });
 
       // Set up error handler
@@ -134,7 +137,7 @@ export class TelegramChannel extends BaseChannel {
   /**
    * Handle incoming Telegram message
    */
-  private async handleMessage(msg: TelegramBot.Message): Promise<void> {
+  private handleMessage(msg: TelegramBot.Message): void {
     // Check if it's a text message
     if (!msg.text) {
       return;

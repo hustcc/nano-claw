@@ -32,7 +32,7 @@ export class Subagent {
   /**
    * Spawn a background task
    */
-  async spawn(description: string, context: AgentContext): Promise<string> {
+  spawn(description: string, context: AgentContext): Promise<string> {
     const taskId = `task-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
     const task: SubagentTask = {
@@ -53,16 +53,16 @@ export class Subagent {
       });
     }
 
-    return taskId;
+    return Promise.resolve(taskId);
   }
 
   /**
    * Execute a task
    */
-  private async executeTask(taskId: string): Promise<void> {
+  private executeTask(taskId: string): Promise<void> {
     const task = this.tasks.get(taskId);
     if (!task || task.status !== 'pending') {
-      return;
+      return Promise.resolve();
     }
 
     this.runningTasks.add(taskId);
@@ -96,6 +96,8 @@ export class Subagent {
       // Start next pending task if available
       this.startNextPendingTask();
     }
+
+    return Promise.resolve();
   }
 
   /**

@@ -16,6 +16,20 @@ export interface DingTalkChannelConfig {
   allowFrom?: string[];
 }
 
+interface DingTalkMessageData {
+  senderId?: string;
+  senderStaffId?: string;
+  text?: {
+    content?: string;
+  };
+  content?: string;
+  conversationId?: string;
+  robotCode?: string;
+  msgId?: string;
+  conversationType?: string;
+  senderNick?: string;
+}
+
 export class DingTalkChannel extends BaseChannel {
   private client: DWClient | null;
   private config: DingTalkChannelConfig;
@@ -32,14 +46,14 @@ export class DingTalkChannel extends BaseChannel {
   /**
    * Initialize the DingTalk client
    */
-  async initialize(): Promise<void> {
+  initialize(): Promise<void> {
     if (!this.config.enabled) {
       logger.info('DingTalk channel is disabled');
-      return;
+      return Promise.resolve();
     }
 
     if (!this.config.clientId || !this.config.clientSecret) {
-      throw new Error('DingTalk clientId and clientSecret are required');
+      return Promise.reject(new Error('DingTalk clientId and clientSecret are required'));
     }
 
     try {
@@ -50,9 +64,10 @@ export class DingTalkChannel extends BaseChannel {
       });
 
       logger.info('DingTalk channel initialized');
+      return Promise.resolve();
     } catch (error) {
       logger.error('Failed to initialize DingTalk channel', error);
-      throw error;
+      return Promise.reject(error);
     }
   }
 
@@ -68,15 +83,15 @@ export class DingTalkChannel extends BaseChannel {
       // Register callback for bot messages
       // Note: DingTalk Stream API uses different topics based on message type
       // For bot IM messages, we register both SYSTEM and IM topics
-      this.client.registerCallbackListener('SYSTEM', async (res: DWClientDownStream) => {
-        await this.handleMessage(res);
+      this.client.registerCallbackListener('SYSTEM', (res: DWClientDownStream) => {
+        this.handleMessage(res);
         return EventAck.SUCCESS;
       });
 
       this.client.registerCallbackListener(
         '/v1.0/im/bot/messages/get',
-        async (res: DWClientDownStream) => {
-          await this.handleMessage(res);
+        (res: DWClientDownStream) => {
+          this.handleMessage(res);
           return EventAck.SUCCESS;
         }
       );
@@ -95,17 +110,18 @@ export class DingTalkChannel extends BaseChannel {
   /**
    * Stop listening for messages
    */
-  async stop(): Promise<void> {
+  stop(): Promise<void> {
     if (this.client) {
       try {
-        await this.client.disconnect();
+        this.client.disconnect();
         this.connected = false;
         logger.info('DingTalk channel stopped');
       } catch (error) {
         logger.error('Failed to stop DingTalk channel', error);
-        throw error;
+        return Promise.reject(error);
       }
     }
+    return Promise.resolve();
   }
 
   /**
@@ -136,15 +152,18 @@ export class DingTalkChannel extends BaseChannel {
       const axios = (await import('axios')).default;
 
       // Get access token from DingTalk
-      const tokenResponse = await axios.post('https://api.dingtalk.com/v1.0/oauth2/accessToken', {
-        appKey: this.config.clientId,
-        appSecret: this.config.clientSecret,
-      });
+      const tokenResponse = await axios.post<{ accessToken: string }>(
+        'https://api.dingtalk.com/v1.0/oauth2/accessToken',
+        {
+          appKey: this.config.clientId,
+          appSecret: this.config.clientSecret,
+        }
+      );
 
       const accessToken = tokenResponse.data.accessToken;
 
       // Send message to conversation
-      await axios.post(
+      await axios.post<unknown>(
         `https://api.dingtalk.com/v1.0/robot/oToMessages/batchSend`,
         {
           robotCode,
@@ -177,7 +196,7 @@ export class DingTalkChannel extends BaseChannel {
   /**
    * Handle incoming DingTalk message
    */
-  private async handleMessage(res: DWClientDownStream): Promise<void> {
+  private handleMessage(res: DWClientDownStream): void {
     try {
       const { headers, data } = res;
 
@@ -189,7 +208,10 @@ export class DingTalkChannel extends BaseChannel {
         return;
       }
 
-      const messageData = typeof data === 'string' ? JSON.parse(data) : data;
+      const messageData: DingTalkMessageData =
+        typeof data === 'string'
+          ? (JSON.parse(data) as DingTalkMessageData)
+          : (data as DingTalkMessageData);
 
       // Extract message details
       const senderId = messageData?.senderId || messageData?.senderStaffId;

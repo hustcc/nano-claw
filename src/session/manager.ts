@@ -42,10 +42,14 @@ export class SessionManager {
         if (file.endsWith('.json')) {
           const filePath = path.join(this.sessionsDir, file);
           const content = await fs.readFile(filePath, 'utf-8');
-          const session: Session = JSON.parse(content);
-          // Convert date strings back to Date objects
-          session.createdAt = new Date(session.createdAt);
-          session.lastActivity = new Date(session.lastActivity);
+          const sessionData = JSON.parse(content) as Record<string, unknown>;
+          const session: Session = {
+            id: sessionData.id as string,
+            userId: sessionData.userId as string,
+            channelType: sessionData.channelType as string,
+            createdAt: new Date(sessionData.createdAt as string),
+            lastActivity: new Date(sessionData.lastActivity as string),
+          };
           this.sessions.set(session.id, session);
         }
       }

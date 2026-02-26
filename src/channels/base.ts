@@ -96,5 +96,5 @@ export abstract class BaseChannel extends EventEmitter {
  * Channel factory interface
  */
 export interface ChannelFactory {
-  create(config: any): BaseChannel;
+  create(config: unknown): BaseChannel;
 }

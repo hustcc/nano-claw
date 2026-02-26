@@ -31,14 +31,14 @@ export class DiscordChannel extends BaseChannel {
   /**
    * Initialize the Discord bot
    */
-  async initialize(): Promise<void> {
+  initialize(): Promise<void> {
     if (!this.config.enabled) {
       logger.info('Discord channel is disabled');
-      return;
+      return Promise.resolve();
     }
 
     if (!this.config.token) {
-      throw new Error('Discord bot token is required');
+      return Promise.reject(new Error('Discord bot token is required'));
     }
 
     try {
@@ -52,9 +52,10 @@ export class DiscordChannel extends BaseChannel {
       });
 
       logger.info('Discord channel initialized');
+      return Promise.resolve();
     } catch (error) {
       logger.error('Failed to initialize Discord channel', error);
-      throw error;
+      return Promise.reject(error);
     }
   }
 
@@ -74,9 +75,11 @@ export class DiscordChannel extends BaseChannel {
       });
 
       this.client.on('messageCreate', (msg) => {
-        this.handleMessage(msg).catch((error) => {
+        try {
+          this.handleMessage(msg);
+        } catch (error) {
           logger.error('Error handling Discord message', error);
-        });
+        }
       });
 
       this.client.on('error', (error) => {
@@ -96,17 +99,18 @@ export class DiscordChannel extends BaseChannel {
   /**
    * Stop listening for messages
    */
-  async stop(): Promise<void> {
+  stop(): Promise<void> {
     if (this.client) {
       try {
-        this.client.destroy();
+        void this.client.destroy();
         this.connected = false;
         logger.info('Discord channel stopped');
       } catch (error) {
         logger.error('Failed to stop Discord channel', error);
-        throw error;
+        return Promise.reject(error);
       }
     }
+    return Promise.resolve();
   }
 
   /**
@@ -153,7 +157,7 @@ export class DiscordChannel extends BaseChannel {
   /**
    * Handle incoming Discord message
    */
-  private async handleMessage(msg: Message): Promise<void> {
+  private handleMessage(msg: Message): void {
     // Ignore bot messages
     if (msg.author.bot) {
       return;

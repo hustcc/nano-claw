@@ -23,9 +23,9 @@ program.name('nano-claw').description('Ultra-lightweight personal AI assistant')
 program
   .command('onboard')
   .description('Initialize configuration')
-  .action(async () => {
+  .action(() => {
     try {
-      await onboardCommand();
+      onboardCommand();
     } catch (error) {
       logger.error({ error }, 'Onboard failed');
       console.error(chalk.red(`Error: ${(error as Error).message}`));
@@ -53,9 +53,9 @@ program
 program
   .command('status')
   .description('Show system status')
-  .action(async () => {
+  .action(() => {
     try {
-      await statusCommand();
+      statusCommand();
     } catch (error) {
       logger.error({ error }, 'Status command failed');
       console.error(chalk.red(`Error: ${(error as Error).message}`));
@@ -97,9 +97,9 @@ cron
   .requiredOption('-n, --name <name>', 'Job name')
   .requiredOption('-s, --schedule <schedule>', 'Cron schedule expression')
   .requiredOption('-t, --task <task>', 'Task to execute')
-  .action(async (options: { name: string; schedule: string; task: string }) => {
+  .action((options: { name: string; schedule: string; task: string }) => {
     try {
-      await cronAddCommand(options);
+      cronAddCommand(options);
     } catch (error) {
       logger.error({ error }, 'Cron add failed');
       console.error(chalk.red(`Error: ${(error as Error).message}`));
@@ -110,9 +110,9 @@ cron
 cron
   .command('list')
   .description('List all cron jobs')
-  .action(async () => {
+  .action(() => {
     try {
-      await cronListCommand();
+      cronListCommand();
     } catch (error) {
       logger.error({ error }, 'Cron list failed');
       console.error(chalk.red(`Error: ${(error as Error).message}`));
@@ -123,9 +123,9 @@ cron
 cron
   .command('remove <id>')
   .description('Remove a cron job')
-  .action(async (id: string) => {
+  .action((id: string) => {
     try {
-      await cronRemoveCommand(id);
+      cronRemoveCommand(id);
     } catch (error) {
       logger.error({ error }, 'Cron remove failed');
       console.error(chalk.red(`Error: ${(error as Error).message}`));
@@ -136,9 +136,9 @@ cron
 cron
   .command('enable <id>')
   .description('Enable a cron job')
-  .action(async (id: string) => {
+  .action((id: string) => {
     try {
-      await cronEnableCommand(id);
+      cronEnableCommand(id);
     } catch (error) {
       logger.error({ error }, 'Cron enable failed');
       console.error(chalk.red(`Error: ${(error as Error).message}`));
@@ -149,9 +149,9 @@ cron
 cron
   .command('disable <id>')
   .description('Disable a cron job')
-  .action(async (id: string) => {
+  .action((id: string) => {
     try {
-      await cronDisableCommand(id);
+      cronDisableCommand(id);
     } catch (error) {
       logger.error({ error }, 'Cron disable failed');
       console.error(chalk.red(`Error: ${(error as Error).message}`));

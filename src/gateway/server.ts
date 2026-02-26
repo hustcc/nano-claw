@@ -35,11 +35,11 @@ export class GatewayServer {
     logger.info('Initializing gateway server...');
 
     // Initialize session manager
-    await getSessionManager();
+    void getSessionManager();
     logger.info('Session manager initialized');
 
     // Load configuration
-    const config = await getConfig();
+    const config = getConfig();
 
     // Register available channels
     await this.registerChannels(config);
@@ -54,9 +54,10 @@ export class GatewayServer {
       this.heartbeat = initializeHeartbeat({
         enabled: false, // Disabled by default, can be enabled in config
         interval: 60000, // 1 minute
-        onBeat: async () => {
+        onBeat: () => {
           logger.debug('Heartbeat tick');
           // Can be extended to perform periodic tasks
+          return Promise.resolve();
         },
       });
     }
@@ -67,7 +68,7 @@ export class GatewayServer {
   /**
    * Register available channels
    */
-  private async registerChannels(config: Awaited<ReturnType<typeof getConfig>>): Promise<void> {
+  private async registerChannels(config: ReturnType<typeof getConfig>): Promise<void> {
     // Register Telegram channel if configured
     if (config.channels?.telegram) {
       const telegramChannel = new TelegramChannel(config.channels.telegram);
@@ -160,7 +161,7 @@ export class GatewayServer {
       );
 
       // Get config
-      const config = await getConfig();
+      const config = getConfig();
 
       // Create agent loop for this session and message
       const agentLoop = new AgentLoop(message.sessionId, config);
@@ -199,8 +200,8 @@ export class GatewayServer {
    */
   getStatus(): {
     running: boolean;
-    channels: Record<string, any>;
-    heartbeat: any;
+    channels: Record<string, unknown>;
+    heartbeat: unknown;
   } {
     return {
       running: this.isRunning,

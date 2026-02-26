@@ -30,22 +30,22 @@ export class ReadFileTool extends BaseTool {
     };
   }
 
-  async execute(args: Record<string, unknown>): Promise<ToolResult> {
+  execute(args: Record<string, unknown>): Promise<ToolResult> {
     const path = args.path as string;
 
     if (!path) {
-      return this.error('Path is required');
+      return Promise.resolve(this.error('Path is required'));
     }
 
     try {
       if (!existsSync(path)) {
-        return this.error(`File not found: ${path}`);
+        return Promise.resolve(this.error(`File not found: ${path}`));
       }
 
       const content = readFileSync(path, 'utf-8');
-      return this.success(content);
+      return Promise.resolve(this.success(content));
     } catch (error) {
-      return this.error(`Failed to read file: ${(error as Error).message}`);
+      return Promise.resolve(this.error(`Failed to read file: ${(error as Error).message}`));
     }
   }
 }
@@ -81,16 +81,16 @@ export class WriteFileTool extends BaseTool {
     };
   }
 
-  async execute(args: Record<string, unknown>): Promise<ToolResult> {
+  execute(args: Record<string, unknown>): Promise<ToolResult> {
     const path = args.path as string;
     const content = args.content as string;
 
     if (!path) {
-      return this.error('Path is required');
+      return Promise.resolve(this.error('Path is required'));
     }
 
     if (content === undefined) {
-      return this.error('Content is required');
+      return Promise.resolve(this.error('Content is required'));
     }
 
     try {
@@ -101,9 +101,9 @@ export class WriteFileTool extends BaseTool {
       }
 
       writeFileSync(path, content, 'utf-8');
-      return this.success(`File written successfully: ${path}`);
+      return Promise.resolve(this.success(`File written successfully: ${path}`));
     } catch (error) {
-      return this.error(`Failed to write file: ${(error as Error).message}`);
+      return Promise.resolve(this.error(`Failed to write file: ${(error as Error).message}`));
     }
   }
 }

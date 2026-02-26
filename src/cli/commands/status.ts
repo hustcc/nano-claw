@@ -7,7 +7,7 @@ import { PROVIDERS } from '../../providers/registry';
 /**
  * Status command - show system status
  */
-export async function statusCommand(): Promise<void> {
+export function statusCommand(): void {
   console.log(chalk.blue.bold('\n🐈 nano-claw Status\n'));
 
   try {

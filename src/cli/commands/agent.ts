@@ -43,7 +43,7 @@ export async function agentCommand(options: { message?: string; session?: string
 
   rl.prompt();
 
-  rl.on('line', async (line: string) => {
+  rl.on('line', (line: string) => {
     const message = line.trim();
 
     if (!message) {
@@ -66,18 +66,20 @@ export async function agentCommand(options: { message?: string; session?: string
       return;
     }
 
-    // Process message
+    // Process message asynchronously
     console.log(chalk.blue('\n🤖 Agent: '));
 
-    try {
-      const response = await agent.processMessage(message);
-      console.log(chalk.green(response.content));
-      console.log('');
-    } catch (error) {
-      console.error(chalk.red(`\nError: ${(error as Error).message}\n`));
-    }
-
-    rl.prompt();
+    agent
+      .processMessage(message)
+      .then((response) => {
+        console.log(chalk.green(response.content));
+        console.log('');
+        rl.prompt();
+      })
+      .catch((error) => {
+        console.error(chalk.red(`\nError: ${(error as Error).message}\n`));
+        rl.prompt();
+      });
   });
 
   rl.on('close', () => {

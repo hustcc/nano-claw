@@ -6,7 +6,7 @@ import { getHomeDir, getConfigPath, getMemoryDir, getSkillsDir } from '../../uti
 /**
  * Onboard command - initialize configuration
  */
-export async function onboardCommand(): Promise<void> {
+export function onboardCommand(): void {
   console.log(chalk.blue.bold('\n🐈 Welcome to nano-claw!\n'));
 
   const homeDir = getHomeDir();

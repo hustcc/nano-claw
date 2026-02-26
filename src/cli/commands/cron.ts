@@ -7,11 +7,7 @@ import { formatDate } from '../../utils/helpers';
 /**
  * Cron add command - add a new cron job
  */
-export async function cronAddCommand(options: {
-  name: string;
-  schedule: string;
-  task: string;
-}): Promise<void> {
+export function cronAddCommand(options: { name: string; schedule: string; task: string }): void {
   try {
     const config = getConfig();
     const cronManager = new CronManager(config);
@@ -45,7 +41,7 @@ export async function cronAddCommand(options: {
 /**
  * Cron list command - list all cron jobs
  */
-export async function cronListCommand(): Promise<void> {
+export function cronListCommand(): void {
   try {
     const config = getConfig();
     const cronManager = new CronManager(config);
@@ -87,7 +83,7 @@ export async function cronListCommand(): Promise<void> {
 /**
  * Cron remove command - remove a cron job
  */
-export async function cronRemoveCommand(jobId: string): Promise<void> {
+export function cronRemoveCommand(jobId: string): void {
   try {
     const config = getConfig();
     const cronManager = new CronManager(config);
@@ -109,7 +105,7 @@ export async function cronRemoveCommand(jobId: string): Promise<void> {
 /**
  * Cron enable command - enable a cron job
  */
-export async function cronEnableCommand(jobId: string): Promise<void> {
+export function cronEnableCommand(jobId: string): void {
   try {
     const config = getConfig();
     const cronManager = new CronManager(config);
@@ -131,7 +127,7 @@ export async function cronEnableCommand(jobId: string): Promise<void> {
 /**
  * Cron disable command - disable a cron job
  */
-export async function cronDisableCommand(jobId: string): Promise<void> {
+export function cronDisableCommand(jobId: string): void {
   try {
     const config = getConfig();
     const cronManager = new CronManager(config);
