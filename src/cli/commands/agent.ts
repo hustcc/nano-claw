@@ -45,14 +45,10 @@ export async function agentCommand(options: { message?: string; session?: string
 
   rl.on('line', (line: string) => {
     const message = line.trim();
-
-    if (!message) {
-      rl.prompt();
-      return;
-    }
+    if (!message) return rl.prompt();
 
     // Check for exit commands
-    if (message.toLowerCase() === 'exit' || message.toLowerCase() === 'quit') {
+    if (['exit', 'quit'].includes(message.toLowerCase())) {
       console.log(chalk.blue('\n👋 Goodbye!\n'));
       rl.close();
       process.exit(0);
@@ -62,13 +58,11 @@ export async function agentCommand(options: { message?: string; session?: string
     if (message.toLowerCase() === 'clear') {
       agent.clearHistory();
       console.log(chalk.yellow('\n✓ Conversation history cleared\n'));
-      rl.prompt();
-      return;
+      return rl.prompt();
     }
 
-    // Process message asynchronously
+    // Process message
     console.log(chalk.blue('\n🤖 Agent: '));
-
     agent
       .processMessage(message)
       .then((response) => {

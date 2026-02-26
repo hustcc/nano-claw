@@ -52,13 +52,9 @@ export class GatewayServer {
     // Initialize heartbeat if configured
     if (config.agents?.defaults?.systemPrompt) {
       this.heartbeat = initializeHeartbeat({
-        enabled: false, // Disabled by default, can be enabled in config
-        interval: 60000, // 1 minute
-        onBeat: () => {
-          logger.debug('Heartbeat tick');
-          // Can be extended to perform periodic tasks
-          return Promise.resolve();
-        },
+        enabled: false,
+        interval: 60000,
+        onBeat: async () => logger.debug('Heartbeat tick'),
       });
     }
 

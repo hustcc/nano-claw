@@ -46,29 +46,17 @@ export class DingTalkChannel extends BaseChannel {
   /**
    * Initialize the DingTalk client
    */
-  initialize(): Promise<void> {
-    if (!this.config.enabled) {
-      logger.info('DingTalk channel is disabled');
-      return Promise.resolve();
-    }
-
+  async initialize(): Promise<void> {
+    if (!this.config.enabled) return logger.info('DingTalk channel is disabled');
     if (!this.config.clientId || !this.config.clientSecret) {
-      return Promise.reject(new Error('DingTalk clientId and clientSecret are required'));
+      throw new Error('DingTalk clientId and clientSecret are required');
     }
 
-    try {
-      // Initialize DingTalk Stream client
-      this.client = new DWClient({
-        clientId: this.config.clientId,
-        clientSecret: this.config.clientSecret,
-      });
-
-      logger.info('DingTalk channel initialized');
-      return Promise.resolve();
-    } catch (error) {
-      logger.error('Failed to initialize DingTalk channel', error);
-      return Promise.reject(error);
-    }
+    this.client = new DWClient({
+      clientId: this.config.clientId,
+      clientSecret: this.config.clientSecret,
+    });
+    logger.info('DingTalk channel initialized');
   }
 
   /**
@@ -110,18 +98,12 @@ export class DingTalkChannel extends BaseChannel {
   /**
    * Stop listening for messages
    */
-  stop(): Promise<void> {
+  async stop(): Promise<void> {
     if (this.client) {
-      try {
-        this.client.disconnect();
-        this.connected = false;
-        logger.info('DingTalk channel stopped');
-      } catch (error) {
-        logger.error('Failed to stop DingTalk channel', error);
-        return Promise.reject(error);
-      }
+      this.client.disconnect();
+      this.connected = false;
+      logger.info('DingTalk channel stopped');
     }
-    return Promise.resolve();
   }
 
   /**
@@ -216,22 +198,13 @@ export class DingTalkChannel extends BaseChannel {
       // Extract message details
       const senderId = messageData?.senderId || messageData?.senderStaffId;
       const text = messageData?.text?.content || messageData?.content;
+
+      if (!senderId || !text || !this.isUserAuthorized(senderId, this.config.allowFrom)) {
+        return;
+      }
+
       const conversationId = messageData?.conversationId;
       const robotCode = messageData?.robotCode;
-
-      if (!senderId || !text) {
-        return;
-      }
-
-      // Check if user is allowed
-      if (
-        this.config.allowFrom &&
-        this.config.allowFrom.length > 0 &&
-        !this.config.allowFrom.includes(senderId)
-      ) {
-        logger.warn(`DingTalk message from unauthorized user: ${senderId}`);
-        return;
-      }
 
       // Create channel message
       const channelMessage: ChannelMessage = {

@@ -90,6 +90,20 @@ export abstract class BaseChannel extends EventEmitter {
     logger.error(`Error in ${this.channelType} channel`, error);
     this.emit('error', error);
   }
+
+  /**
+   * Check if user is authorized
+   */
+  protected isUserAuthorized(userId: string, allowFrom?: string[]): boolean {
+    if (!allowFrom || allowFrom.length === 0) {
+      return true;
+    }
+    const authorized = allowFrom.includes(userId);
+    if (!authorized) {
+      logger.warn(`${this.channelType} message from unauthorized user: ${userId}`);
+    }
+    return authorized;
+  }
 }
 
 /**

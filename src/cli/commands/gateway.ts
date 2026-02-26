@@ -26,26 +26,17 @@ export async function gatewayCommand(): Promise<void> {
   console.log(chalk.blue('Starting gateway server...'));
 
   const gateway = getGateway();
-
-  // Handle graceful shutdown
   const shutdown = async () => {
     console.log(chalk.yellow('\nShutting down gateway...'));
     await gateway.stop();
     process.exit(0);
   };
 
-  process.on('SIGINT', () => {
-    shutdown().catch((error) => {
-      logger.error('Shutdown failed', error);
-      process.exit(1);
-    });
-  });
-  process.on('SIGTERM', () => {
-    shutdown().catch((error) => {
-      logger.error('Shutdown failed', error);
-      process.exit(1);
-    });
-  });
+  ['SIGINT', 'SIGTERM'].forEach((signal) =>
+    process.on(signal, () =>
+      shutdown().catch((e) => (logger.error('Shutdown failed', e), process.exit(1)))
+    )
+  );
 
   try {
     await gateway.start();

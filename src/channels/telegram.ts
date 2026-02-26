@@ -31,25 +31,12 @@ export class TelegramChannel extends BaseChannel {
   /**
    * Initialize the Telegram bot
    */
-  initialize(): Promise<void> {
-    if (!this.config.enabled) {
-      logger.info('Telegram channel is disabled');
-      return Promise.resolve();
-    }
+  async initialize(): Promise<void> {
+    if (!this.config.enabled) return logger.info('Telegram channel is disabled');
+    if (!this.config.token) throw new Error('Telegram bot token is required');
 
-    if (!this.config.token) {
-      return Promise.reject(new Error('Telegram bot token is required'));
-    }
-
-    try {
-      // Initialize bot without auto-polling (we start it manually in start())
-      this.bot = new TelegramBot(this.config.token, { polling: false });
-      logger.info('Telegram channel initialized');
-      return Promise.resolve();
-    } catch (error) {
-      logger.error('Failed to initialize Telegram channel', error);
-      return Promise.reject(error);
-    }
+    this.bot = new TelegramBot(this.config.token, { polling: false });
+    logger.info('Telegram channel initialized');
   }
 
   /**
@@ -145,16 +132,7 @@ export class TelegramChannel extends BaseChannel {
 
     // Check if user is allowed
     const userId = msg.from?.id.toString();
-    if (!userId) {
-      return;
-    }
-
-    if (
-      this.config.allowFrom &&
-      this.config.allowFrom.length > 0 &&
-      !this.config.allowFrom.includes(userId)
-    ) {
-      logger.warn(`Telegram message from unauthorized user: ${userId}`);
+    if (!userId || !this.isUserAuthorized(userId, this.config.allowFrom)) {
       return;
     }
 

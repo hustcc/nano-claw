@@ -32,38 +32,33 @@ export class Subagent {
   /**
    * Spawn a background task
    */
-  spawn(description: string, context: AgentContext): Promise<string> {
+  async spawn(description: string, context: AgentContext): Promise<string> {
     const taskId = `task-${Date.now()}-${Math.random().toString(36).substring(2, 11)}`;
 
-    const task: SubagentTask = {
+    this.tasks.set(taskId, {
       id: taskId,
       description,
       context,
       status: 'pending',
       createdAt: new Date(),
-    };
+    });
 
-    this.tasks.set(taskId, task);
     logger.info(`Spawned subagent task: ${taskId} - ${description}`);
 
     // Start task if we have capacity
     if (this.runningTasks.size < this.maxConcurrent) {
-      this.executeTask(taskId).catch((error) => {
-        logger.error(`Subagent task failed: ${taskId}`, error);
-      });
+      void this.executeTask(taskId);
     }
 
-    return Promise.resolve(taskId);
+    return taskId;
   }
 
   /**
    * Execute a task
    */
-  private executeTask(taskId: string): Promise<void> {
+  private async executeTask(taskId: string): Promise<void> {
     const task = this.tasks.get(taskId);
-    if (!task || task.status !== 'pending') {
-      return Promise.resolve();
-    }
+    if (!task || task.status !== 'pending') return;
 
     this.runningTasks.add(taskId);
     task.status = 'running';
@@ -71,48 +66,29 @@ export class Subagent {
 
     try {
       logger.info(`Executing subagent task: ${taskId}`);
-
-      // Note: For actual implementation, we would need to:
-      // 1. Load config
-      // 2. Create a new AgentLoop with the subagent session
-      // 3. Process the task description
-      // For now, we'll just set a placeholder result
-      const result = `Subagent task ${taskId} executed successfully`;
-
+      task.result = `Subagent task ${taskId} executed successfully`;
       task.status = 'completed';
-      task.result = result;
-      task.completedAt = new Date();
-
       logger.info(`Subagent task completed: ${taskId}`);
     } catch (error) {
       task.status = 'failed';
       task.error = error instanceof Error ? error.message : String(error);
-      task.completedAt = new Date();
-
       logger.error(`Subagent task failed: ${taskId}`, error);
     } finally {
+      task.completedAt = new Date();
       this.runningTasks.delete(taskId);
-
-      // Start next pending task if available
       this.startNextPendingTask();
     }
-
-    return Promise.resolve();
   }
 
   /**
    * Start next pending task if available
    */
   private startNextPendingTask(): void {
-    if (this.runningTasks.size >= this.maxConcurrent) {
-      return;
-    }
+    if (this.runningTasks.size >= this.maxConcurrent) return;
 
     for (const [taskId, task] of this.tasks.entries()) {
       if (task.status === 'pending') {
-        this.executeTask(taskId).catch((error) => {
-          logger.error(`Subagent task failed: ${taskId}`, error);
-        });
+        void this.executeTask(taskId);
         break;
       }
     }

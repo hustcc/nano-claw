@@ -47,6 +47,18 @@ interface AnthropicResponse {
 }
 
 /**
+ * Handle provider API errors consistently
+ */
+function handleProviderError(error: unknown, providerName: string): never {
+  logger.error({ error }, `${providerName} API error`);
+  if (axios.isAxiosError(error)) {
+    const errorMessage = (error.response?.data as { error?: { message?: string } })?.error?.message;
+    throw new ProviderError(`${providerName} API error: ${errorMessage || error.message}`);
+  }
+  throw new ProviderError(`${providerName} API error: ${(error as Error).message}`);
+}
+
+/**
  * Base class for LLM providers
  */
 export abstract class BaseProvider {
@@ -142,13 +154,7 @@ export class OpenRouterProvider extends BaseProvider {
           : undefined,
       };
     } catch (error) {
-      logger.error({ error }, 'OpenRouter API error');
-      if (axios.isAxiosError(error)) {
-        const errorMessage = (error.response?.data as { error?: { message?: string } })?.error
-          ?.message;
-        throw new ProviderError(`OpenRouter API error: ${errorMessage || error.message}`);
-      }
-      throw new ProviderError(`OpenRouter API error: ${(error as Error).message}`);
+      handleProviderError(error, 'OpenRouter');
     }
   }
 }
@@ -221,13 +227,7 @@ export class AnthropicProvider extends BaseProvider {
           : undefined,
       };
     } catch (error) {
-      logger.error({ error }, 'Anthropic API error');
-      if (axios.isAxiosError(error)) {
-        const errorMessage = (error.response?.data as { error?: { message?: string } })?.error
-          ?.message;
-        throw new ProviderError(`Anthropic API error: ${errorMessage || error.message}`);
-      }
-      throw new ProviderError(`Anthropic API error: ${(error as Error).message}`);
+      handleProviderError(error, 'Anthropic');
     }
   }
 }
@@ -291,13 +291,7 @@ export class OpenAIProvider extends BaseProvider {
           : undefined,
       };
     } catch (error) {
-      logger.error({ error }, 'OpenAI API error');
-      if (axios.isAxiosError(error)) {
-        const errorMessage = (error.response?.data as { error?: { message?: string } })?.error
-          ?.message;
-        throw new ProviderError(`OpenAI API error: ${errorMessage || error.message}`);
-      }
-      throw new ProviderError(`OpenAI API error: ${(error as Error).message}`);
+      handleProviderError(error, 'OpenAI');
     }
   }
 }

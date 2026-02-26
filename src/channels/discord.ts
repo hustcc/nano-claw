@@ -31,32 +31,19 @@ export class DiscordChannel extends BaseChannel {
   /**
    * Initialize the Discord bot
    */
-  initialize(): Promise<void> {
-    if (!this.config.enabled) {
-      logger.info('Discord channel is disabled');
-      return Promise.resolve();
-    }
+  async initialize(): Promise<void> {
+    if (!this.config.enabled) return logger.info('Discord channel is disabled');
+    if (!this.config.token) throw new Error('Discord bot token is required');
 
-    if (!this.config.token) {
-      return Promise.reject(new Error('Discord bot token is required'));
-    }
-
-    try {
-      this.client = new Client({
-        intents: [
-          GatewayIntentBits.Guilds,
-          GatewayIntentBits.GuildMessages,
-          GatewayIntentBits.DirectMessages,
-          GatewayIntentBits.MessageContent,
-        ],
-      });
-
-      logger.info('Discord channel initialized');
-      return Promise.resolve();
-    } catch (error) {
-      logger.error('Failed to initialize Discord channel', error);
-      return Promise.reject(error);
-    }
+    this.client = new Client({
+      intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.DirectMessages,
+        GatewayIntentBits.MessageContent,
+      ],
+    });
+    logger.info('Discord channel initialized');
   }
 
   /**
@@ -99,18 +86,12 @@ export class DiscordChannel extends BaseChannel {
   /**
    * Stop listening for messages
    */
-  stop(): Promise<void> {
+  async stop(): Promise<void> {
     if (this.client) {
-      try {
-        void this.client.destroy();
-        this.connected = false;
-        logger.info('Discord channel stopped');
-      } catch (error) {
-        logger.error('Failed to stop Discord channel', error);
-        return Promise.reject(error);
-      }
+      void this.client.destroy();
+      this.connected = false;
+      logger.info('Discord channel stopped');
     }
-    return Promise.resolve();
   }
 
   /**
@@ -164,13 +145,7 @@ export class DiscordChannel extends BaseChannel {
     }
 
     // Check if user is allowed
-    const userId = msg.author.id;
-    if (
-      this.config.allowFrom &&
-      this.config.allowFrom.length > 0 &&
-      !this.config.allowFrom.includes(userId)
-    ) {
-      logger.warn(`Discord message from unauthorized user: ${userId}`);
+    if (!this.isUserAuthorized(msg.author.id, this.config.allowFrom)) {
       return;
     }
 
@@ -189,6 +164,7 @@ export class DiscordChannel extends BaseChannel {
     }
 
     // Create channel message
+    const userId = msg.author.id;
     const channelMessage: ChannelMessage = {
       id: generateId(),
       sessionId: `discord-${userId}`,
